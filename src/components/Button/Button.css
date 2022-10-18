@@ -1,0 +1,26 @@
+
+.see-more {
+    background-color: var(--red);
+    border: none;
+    padding: 1em 7em;
+    border-radius: 8px;
+    color: var(--white);
+    cursor: pointer;
+    transition: .3s;
+}
+
+.see-more:hover{
+    background-color: var(--maroon);
+    /* box-shadow: 1px 1px 10px -3px var(--red); */
+}
+
+.see-more:active{
+    outline: none;
+    border: 1px solid var(--maroon);
+}
+
+@media (max-width: 575.98px) { 
+    .see-more{
+        padding: 1em 2em;
+    }
+}

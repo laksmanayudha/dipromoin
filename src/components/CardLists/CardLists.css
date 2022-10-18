@@ -1,0 +1,104 @@
+@import url("../../App.css");
+
+.card-lists {
+    margin-top: 2em;
+    display: grid;
+    gap: 3vw;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.card-lists--vertical {
+    grid-template-columns: 1fr ;
+}
+
+.card {
+    box-shadow: 1px 1px 10px -3px var(--black-1);
+    border-radius: 16px;
+    transition: .3s;
+    position: relative;
+    bottom: 0;
+}
+
+.card:hover{
+    box-shadow: 1px 1px 12px var(--black-1);
+    bottom: 5px;
+}
+
+.card-header {
+    height: 15em;
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
+}
+
+.card-header img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    background-color: var(--maroon);
+}
+
+.card-body {
+    padding: .8em 2em 1.5em;
+}
+
+.card-body__title {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.card-body__title:hover {
+    text-decoration: underline;
+}
+
+.card-body__subtitle {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--grey-1);
+}
+
+.card-body__description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 1em;
+}
+
+.card--header-left {
+    display: flex;
+}
+
+.card--header-left .card-header {
+    flex: 6;
+    border-radius: 16px 0 0 16px;
+}
+
+.card--header-left .card-body {
+    flex: 9;
+}
+
+@media (max-width: 991.98px) {
+    .card-lists {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .card-lists--vertical {
+        grid-template-columns: 1fr ;
+    }
+}
+
+@media (max-width: 575.98px) { 
+    .card-lists {
+        grid-template-columns: 1fr;
+    }
+}

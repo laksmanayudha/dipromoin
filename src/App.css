@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 * {
     margin: 0;
@@ -30,7 +31,8 @@
 
     /* font */
     font-size: 16px;
-    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: 'Poppins', sans-serif;
 }
 
 a {
@@ -63,6 +65,21 @@ p {
 
 small {
     font-size: 0.8rem;
+}
+
+.App-main {
+    width: 100%;
+    max-width: 85em;
+    padding: 2em;
+    margin: 0 auto;
+}
+
+img:hover {
+    transform: scale(1.5);
+}
+
+img {
+    transition: .3s;
 }
 
 

@@ -31,8 +31,8 @@
 
 .navbar-body__nav {
     display: inline-block;
-    padding: .7em 1em;
-    margin-right: .5em;
+    padding: .5em .8em;
+    margin-right: .3em;
     border-radius: 8px;
     border: 1px solid transparent;
     transition: .3s;

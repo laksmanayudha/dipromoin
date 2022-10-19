@@ -75,11 +75,27 @@ small {
 }
 
 img:hover {
-    transform: scale(1.5);
+    transform: scale(1.3);
 }
 
 img {
     transition: .3s;
+}
+
+.section-title {
+    color: var(--red);
+}
+
+.section-action {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+.home-page,
+.about-page,
+.umkm-page{
+    animation: fadeIn 1s ease-out;
 }
 
 
@@ -98,3 +114,13 @@ img {
 @media (max-width: 575.98px) { 
 
 }
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+};

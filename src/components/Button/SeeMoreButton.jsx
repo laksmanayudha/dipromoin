@@ -1,9 +1,11 @@
 import React from "react";
+// import PropTypes from "prop-types";
 
-function SeeMoreButton() {
+function SeeMoreButton({ action }) {
+    
     return (
         <div className="carousel-item-body__action">
-            <button className="see-more">See more</button>
+            <button onClick={ action } className="see-more">See more</button>
         </div>
     );
 }

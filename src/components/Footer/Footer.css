@@ -1,0 +1,47 @@
+@import url("../../App.css");
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--black-1);
+    color: var(--white);
+    padding: 1.8em;
+    gap: 1em;
+}
+
+.footer-lists {
+    display: flex;
+    gap: 1.3em;
+}
+
+.footer-lists__icon {
+    border: 1px solid transparent;
+    border-radius: 50%;
+    padding: .8em;
+    transition: .3s;
+}
+
+.footer-lists__icon:hover {
+    border: 1px solid var(--white);
+    box-shadow: 1px 1px 10px -5px var(--white);
+    background-color: var(--white);
+    opacity: .77;
+}
+
+.footer-lists__icon:hover a {
+    color: var(--black-1);
+}
+
+.footer-lists__icon a {
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .3s;
+}
+
+.footer-lists__icon a svg {
+    font-size: 2rem;
+}

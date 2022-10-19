@@ -28,6 +28,7 @@
     height: 15em;
     border-radius: 16px 16px 0 0;
     overflow: hidden;
+    background-color: var(--maroon);
 }
 
 .card-header img {
@@ -35,11 +36,10 @@
     height: 100%;
     object-fit: contain;
     object-position: center;
-    background-color: var(--maroon);
 }
 
 .card-body {
-    padding: .8em 2em 1.5em;
+    padding: 1.5em 2em;
 }
 
 .card-body__title {

@@ -1,0 +1,41 @@
+@import url("../../App.css");
+
+.about-page{
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.about-page-header {
+    background-color: var(--green-5);
+    color: var(--white);
+    padding: 1em;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.about-page-description {
+    margin-top: 1em;
+}
+
+.about-page-images {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 1.3em;
+    flex-wrap: wrap;
+}
+
+.about-age-images__item {
+    flex-basis: 200px;
+    flex-grow: 1;
+}
+
+.documentation{
+    color: blue;
+}
+
+.documentation:hover{
+    text-decoration: underline;
+}

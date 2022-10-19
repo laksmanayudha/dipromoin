@@ -43,6 +43,27 @@ const dummyPromo = [
     }
 ]
 
+const dummyUMKM = [
+    {
+        image: "./images/umkm-4.png",
+        title: "Toko Kue Mbak Rina",
+        subtitle: "Kota Denpasar - Jalan Sudirman ...",
+        description: "Toko kue berdiri sejak 2001. Menyediakan beragam jenis kue Toko kue berdiri sejak 2001. Menyediakan beragam jenis kue Toko kue berdiri sejak 2001. Menyediakan beragam jenis kue Toko kue berdiri sejak 2001. Menyediakan beragam jenis kue Toko kue berdiri sejak 2001. Menyediakan beragam jenis kue"
+    },
+    {
+        image: "./images/umkm-3.png",
+        title: "SRC Pojok Lokal",
+        subtitle: "Kota Jakarta - Jalan Sudriman ...",
+        description: "Menjual beraman jenis makanan kering. Toko kue berdiri sejak 2001. Menyediakan beragam jenis kue Toko kue berdiri sejak 2001. Menyediakan beragam jenis kue Toko kue berdiri sejak 2001. Menyediakan beragam jenis kue"
+    },
+    {
+        image: "./images/umkm-1.jpg",
+        title: "Kerajinan Pak Nur",
+        subtitle: "Kota Jakarta - Jalan Sudriman ...",
+        description: "Kerajinan harga murah kualitas premium. Toko kue berdiri sejak 2001. Menyediakan beragam jenis kue Toko kue berdiri sejak 2001. Menyediakan beragam jenis kue Toko kue berdiri sejak 2001. Menyediakan beragam jenis kue Toko kue berdiri sejak 2001. Menyediakan beragam jenis kue"
+    }
+]
+
 /* something dummy
 <Card
     image= "./images/chef.jpg"
@@ -52,4 +73,4 @@ const dummyPromo = [
 />
 */ 
 
-export { dummy, dummyPromo };
+export { dummy, dummyPromo, dummyUMKM };

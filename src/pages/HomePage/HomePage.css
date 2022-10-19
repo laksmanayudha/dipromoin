@@ -5,13 +5,3 @@
     flex-direction: column;
     gap: 4em;
 }
-
-.section-title {
-    color: var(--red);
-}
-
-.section-action {
-    display: flex;
-    justify-content: center;
-    margin-top: 2em;
-}

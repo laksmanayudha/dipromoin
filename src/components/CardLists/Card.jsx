@@ -1,11 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { getRandomColors } from "../../utils/randomColors";
 
 function Card({ image, title, subtitle, description, leftHeader }) {
 
+    const color = getRandomColors(1)[0];
+
     return (
         <div className={"card " + (leftHeader ? "card--header-left" : "")}>
-            <div className="card-header">
+            <div className="card-header" style={{ backgroundColor: color }}>
                 <img src={image} alt="" />
             </div>
             <div className="card-body">

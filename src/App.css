@@ -94,10 +94,11 @@ img {
 
 .home-page,
 .about-page,
-.umkm-page{
+.umkm-page,
+.promo-page{
     animation: fadeIn 1s ease-out;
+    padding: 1em 2em 0;
 }
-
 
 @media (max-width: 991.98px) {
     :root{

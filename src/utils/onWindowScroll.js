@@ -1,16 +1,15 @@
-const fixedFilterContainer = () => {
-    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-        document.querySelector(".filter-container").classList.add("filter-container--sticky");
-    }else{
-        document.querySelector(".filter-container").classList.remove("filter-container--sticky");
-    }
+let actions = [];
+
+export const setActionOnWindowScroll = (callback) => {
+    actions.push(callback);
 }
 
-
-function onWindowScroll() {
-    window.onscroll = () => { 
-        fixedFilterContainer();
-    }
-}
+const onWindowScroll = () => {
+    window.onscroll = () => {
+        actions.forEach(action => {
+            action(document.documentElement.scrollTop);
+        });
+    };
+};
 
 export default onWindowScroll;

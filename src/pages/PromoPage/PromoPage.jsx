@@ -4,33 +4,40 @@ import { Card, CardLists } from "../../components/CardLists";
 import { FilterContainer, SearchFilter, SelectFilter } from "../../components/Filter";
 import { PageNav, Pagination } from "../../components/Pagination";
 import { PromoDetail, PromoWrapper } from "../../components/PromoDetail";
-import { setActionOnWindowResize } from "../../utils/onWindowResize";
+import { setActionOnWindowResize, currentWindowWidth } from "../../utils/onWindowResize";
+import withPopUp from "../../hocs/withPopUp";
 import "./PromoPage.css";
 
-function PromoPage() {
+function PromoPage({ PopUp, openPopUp, closePopUp }) {
 
     const [promos, setPromos] = React.useState([]);
     const [currentPromo, setCurrentPromo] = React.useState(null);
-    const [isMobileAction, setIsMobileAction] = React.useState(false);
+    const [isMobileAction, setIsMobileAction] = React.useState(currentWindowWidth < 797.98);
 
-    const onPromoClickHandler = (index) => {
+    const onCardClickHandler = (index) => {
         setCurrentPromo(() => promos[index]);
+        if(isMobileAction) {
+            openPopUp()
+        }else{
+            closePopUp();
+        }
     }
 
     React.useEffect(() => {
         setPromos(dummyPromos);
         setActionOnWindowResize((width) => {
             if (width < 797.98) {
-                setIsMobileAction(true)
+                setIsMobileAction(true);
+                // openPopUp();
             }else {
-                setIsMobileAction(false)
+                setIsMobileAction(false);
+                closePopUp();
             }
         })
     }, []);
 
     return (
         <div className="promo-page">
-            {isMobileAction ? "mobile action" : "desktop action"}
             <FilterContainer >
                 <SearchFilter />
                 <SelectFilter defaultIndexValue={0} values={["Kota", "Denpasar", "Jakarta", "Surabaya", "Gianyar", "Malang"]} />
@@ -45,7 +52,7 @@ function PromoPage() {
                                 key={index} 
                                 {...{...item, subtitle: `${item.city} - ${item.address}`}} 
                                 leftHeader={true} 
-                                action={() => { onPromoClickHandler(index) }} 
+                                action={ () => { onCardClickHandler(index) } } 
                             />
                         ))}
                     </CardLists>
@@ -64,8 +71,18 @@ function PromoPage() {
                     </PromoWrapper>
                 </aside>
             </div>
+
+            {/* for mobile device only */}
+            {
+                PopUp(
+                    <PromoWrapper>
+                        {currentPromo && (<PromoDetail {...currentPromo} />)}
+                        {!currentPromo && <h4 className="empty-detail">Detail promo tidak tersedia</h4>}
+                    </PromoWrapper>
+                )
+            }
         </div>
     );
 }
 
-export default PromoPage;
+export default withPopUp(PromoPage);

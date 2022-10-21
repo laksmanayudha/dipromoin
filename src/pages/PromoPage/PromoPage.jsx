@@ -4,7 +4,7 @@ import { Card, CardLists } from "../../components/CardLists";
 import { FilterContainer, SearchFilter, SelectFilter } from "../../components/Filter";
 import { PageNav, Pagination } from "../../components/Pagination";
 import { PromoDetail, PromoWrapper } from "../../components/PromoDetail";
-import { setActionOnWindowResize, currentWindowWidth } from "../../utils/onWindowResize";
+import { setActionOnWindowResize, getCurrenWindowSize } from "../../utils/onWindowResize";
 import withPopUp from "../../hocs/withPopUp";
 import "./PromoPage.css";
 
@@ -12,7 +12,7 @@ function PromoPage({ PopUp, openPopUp, closePopUp }) {
 
     const [promos, setPromos] = React.useState([]);
     const [currentPromo, setCurrentPromo] = React.useState(null);
-    const [isMobileAction, setIsMobileAction] = React.useState(currentWindowWidth < 797.98);
+    const [isMobileAction, setIsMobileAction] = React.useState(getCurrenWindowSize() < 797.98);
 
     const onCardClickHandler = (index) => {
         setCurrentPromo(() => promos[index]);
@@ -33,7 +33,7 @@ function PromoPage({ PopUp, openPopUp, closePopUp }) {
                 setIsMobileAction(false);
                 closePopUp();
             }
-        })
+        });
     }, []);
 
     return (

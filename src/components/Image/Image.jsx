@@ -5,7 +5,7 @@ import { getRandomColors } from "../../utils/randomColors";
 
 function Image({ url }) {
 
-    const color = getRandomColors(1)[0]
+    const [color] = React.useState(() => getRandomColors(1)[0]);
     
     return (
         <div className="image-wrapper" style={{ backgroundColor: color }}>

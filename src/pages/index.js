@@ -1,6 +1,7 @@
 import HomePage from "./HomePage/HomePage";
 import AboutPage from "./AboutPage/AboutPage";
 import UMKMPage from "./UMKMPage/UMKMPage";
+import PromoPage from "./PromoPage/PromoPage";
 
 const authPages = [
 
@@ -21,6 +22,11 @@ const guestPages = [
         name: "umkm",
         path: "/umkm",
         el: () => (<UMKMPage />)
+    },
+    {
+        name: "promo",
+        path: "/promo",
+        el: () => (<PromoPage />)
     },
 ];
 

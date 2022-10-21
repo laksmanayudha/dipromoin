@@ -1,0 +1,68 @@
+@import url("../../App.css");
+
+.promo-wrapper {
+    background-color: var(--purple-5);
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.promo-detail {
+    width: 100%;
+    height: 100%;
+    color: var(--white);
+    padding: 1em;
+}
+
+.promo-detail-header__image {
+    width: 100%;
+    height: 20em;
+}
+
+.promo-detail-header__actions {
+    display: flex;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.promo-detail-header__actions a {
+    background-color: var(--green-3);
+    border-radius: 8px;
+    text-align: center;
+    color: var(--white);
+    padding: .5em 0;
+    flex: 1;
+    transition: .3s;
+}
+
+.promo-detail-header__actions a:hover {
+    background-color: var(--green-1);
+}
+
+.promo-detail-body {
+    padding: 1.5em;
+}
+
+.promo-detail-body__title,
+.promo-detail-body__umkm {
+    cursor: pointer;
+}
+
+.promo-detail-body__title a,
+.promo-detail-body__umkm a {
+    color: var(--white);
+}
+
+.promo-detail-body__title:hover, 
+.promo-detail-body__umkm:hover {
+    text-decoration: underline;
+}
+
+.promo-detail-body__address,
+.promo-detail-body__time {
+    color: var(--grey-1);
+}
+
+.promo-detail-body__description {
+    margin-top: 1em;
+}

@@ -64,6 +64,110 @@ const dummyUMKM = [
     }
 ]
 
+const dummyPromos = [
+    {
+        image: "./images/opening-3.jpg", 
+        title: "Grand Opening Diskon 50%", 
+        umkm: "Kiosko Restaurant", 
+        city: "Kota Jakarta",
+        address: "Jalan Teuku Umar No. 24", 
+        time: "3 menit yang lalu", 
+        description: `
+            Dapatkan diskon hingga 50% dengan minimal pembelian Rp. 50.000 mulai pukul 17.00 WIB - 21.000 WIB. Ketentuan Diskon:
+            1. Minimal membeli 3 jenis item yang berbeda
+            2. Ajak teman kamu 2 orang atau lebih
+            3. Warga negara indonesia                             
+            
+            Dapatkan diskon hingga 50% dengan minimal pembelian Rp. 50.000 mulai pukul 17.00 WIB - 21.000 WIB. Ketentuan Diskon:
+            1. Minimal membeli 3 jenis item yang berbeda
+            2. Ajak teman kamu 2 orang atau lebih
+            3. Warga negara indonesia                            
+                                                      
+            Dapatkan diskon hingga 50% dengan minimal pembelian Rp. 50.000 mulai pukul 17.00 WIB - 21.000 WIB. Ketentuan Diskon:
+            1. Minimal membeli 3 jenis item yang berbeda
+            2. Ajak teman kamu 2 orang atau lebih
+            3. Warga negara indonesia
+        `, 
+        link: "https://www.instagram.com/laksmanayudha_/?hl=en", 
+        phone: "https://wa.me/6282235537167",
+        urlDetail: "/",
+        urlUMKM: "/umkm" 
+    },
+    {
+        image: "./images/opening-2.jpg", 
+        title: "Soft Diskon 20% off", 
+        umkm: "Pondok Indah", 
+        city: "Kota Denpasar",
+        address: "Jalan Nangka Umar No. 278", 
+        time: "4 menit yang lalu", 
+        description: `
+            Dapatkan diskon hingga 20% dengan minimal pembelian Rp. 40.000 dengan item yang berbeda - beda                            
+        `, 
+        link: "https://www.instagram.com/laksmanayudha_/?hl=en", 
+        phone: "https://wa.me/6282235537167",
+        urlDetail: "/",
+        urlUMKM: "/umkm" 
+    },
+    {
+        image: "./images/opening-1.jpg", 
+        title: "Beli 1 Gratis 1", 
+        umkm: "MeeNUM", 
+        city: "Kota Surabaya",
+        address: "Jalan Teuku Umar No. 26", 
+        time: "16 Agustus 2022", 
+        description: `
+            Beli 1 Gratis 1 Ayoo Beli silahkan ambil sempuasnya semasih ada kesmatan hingga sore nanti.
+        `, 
+        link: "https://www.instagram.com/laksmanayudha_/?hl=en", 
+        phone: "https://wa.me/6282235537167",
+        urlDetail: "/",
+        urlUMKM: "/umkm" 
+    },
+    {
+        image: "./images/opening-2.jpg", 
+        title: "Soft Diskon 20% off", 
+        umkm: "Pondok Indah", 
+        city: "Kota Denpasar",
+        address: "Jalan Nangka Umar No. 278", 
+        time: "4 menit yang lalu", 
+        description: `
+            Dapatkan diskon hingga 20% dengan minimal pembelian Rp. 40.000 dengan item yang berbeda - beda                            
+        `, 
+        link: "https://www.instagram.com/laksmanayudha_/?hl=en", 
+        phone: "https://wa.me/6282235537167",
+        urlDetail: "/",
+        urlUMKM: "/umkm" 
+    },
+    {
+        image: "./images/opening-3.jpg", 
+        title: "Grand Opening Diskon 50%", 
+        umkm: "Kiosko Restaurant", 
+        city: "Kota Jakarta",
+        address: "Jalan Teuku Umar No. 24", 
+        time: "3 menit yang lalu", 
+        description: `
+            Dapatkan diskon hingga 50% dengan minimal pembelian Rp. 50.000 mulai pukul 17.00 WIB - 21.000 WIB. Ketentuan Diskon:
+            1. Minimal membeli 3 jenis item yang berbeda
+            2. Ajak teman kamu 2 orang atau lebih
+            3. Warga negara indonesia                             
+            
+            Dapatkan diskon hingga 50% dengan minimal pembelian Rp. 50.000 mulai pukul 17.00 WIB - 21.000 WIB. Ketentuan Diskon:
+            1. Minimal membeli 3 jenis item yang berbeda
+            2. Ajak teman kamu 2 orang atau lebih
+            3. Warga negara indonesia                            
+                                                      
+            Dapatkan diskon hingga 50% dengan minimal pembelian Rp. 50.000 mulai pukul 17.00 WIB - 21.000 WIB. Ketentuan Diskon:
+            1. Minimal membeli 3 jenis item yang berbeda
+            2. Ajak teman kamu 2 orang atau lebih
+            3. Warga negara indonesia
+        `, 
+        link: "https://www.instagram.com/laksmanayudha_/?hl=en", 
+        phone: "https://wa.me/6282235537167",
+        urlDetail: "/",
+        urlUMKM: "/umkm" 
+    },
+]
+
 /* something dummy
 <Card
     image= "./images/chef.jpg"
@@ -73,4 +177,4 @@ const dummyUMKM = [
 />
 */ 
 
-export { dummy, dummyPromo, dummyUMKM };
+export { dummy, dummyPromo, dummyUMKM, dummyPromos };

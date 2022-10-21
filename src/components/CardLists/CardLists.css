@@ -17,11 +17,12 @@
     transition: .3s;
     position: relative;
     bottom: 0;
+    cursor: pointer;
 }
 
 .card:hover{
     box-shadow: 1px 1px 12px var(--black-1);
-    bottom: 5px;
+    /* bottom: 5px; */
 }
 
 .card-header {

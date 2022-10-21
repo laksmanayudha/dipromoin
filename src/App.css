@@ -70,8 +70,8 @@ small {
 .App-main {
     width: 100%;
     max-width: 85em;
-    padding: 2em;
-    margin: 0 auto;
+    /* padding: 2em; */
+    margin: 1em auto 0;
 }
 
 img:hover {
@@ -89,7 +89,7 @@ img {
 .section-action {
     display: flex;
     justify-content: center;
-    margin-top: 2em;
+    margin: 2em 0;
 }
 
 .home-page,

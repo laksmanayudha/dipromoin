@@ -1,5 +1,9 @@
 @import url("../../App.css");
 
+.umkm-page {
+    padding: 2em;
+}
+
 .umkm-page .section-title {
     margin-top: 1em;
 }

@@ -1,0 +1,44 @@
+@import url("../../App.css");
+
+.empty-detail {
+    color: var(--grey-1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    border: 1px solid var(--grey-1);
+    border-radius: 8px;
+    margin:  2em  2em 0;
+}
+
+.promo-page {
+    padding: 1em 2em 0;
+}
+
+.promo-page-display {
+    display: flex;
+    gap: 1em;
+}
+
+.promo-page-display__detail {
+    position: sticky;
+    top: calc(80px + 1em);
+    height: 100vh;
+    margin-top: 1em;
+}
+
+.promo-page-display__lists,
+.promo-page-display__detail {
+    width: 100%;
+    flex: 1;
+}
+
+.promo-page-display__lists .section-title {
+    margin-top: 1em;
+}
+
+@media (max-width: 797.98px) { 
+    .promo-page-display__detail {
+        display: none;
+    }
+}

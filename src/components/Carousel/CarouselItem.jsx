@@ -16,7 +16,9 @@ function CarouselItem({ image, title, address, description }) {
                 <h2 className="carousel-item-body__title">{ title }</h2>
                 <small className="carousel-item-body__address">{ address }</small>
                 <p className="carousel-item-body__description">{ description }</p>
-                <SeeMoreButton />
+                <div className="carousel-item-body__action">
+                    <SeeMoreButton />
+                </div>
             </div>
         </div>
     );

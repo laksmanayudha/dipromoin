@@ -25,8 +25,8 @@ function App() {
           <NavbarLink label="About us" href={routes("about")} />
           <NavbarLink label="Promo" href={routes("promo")} />
           <NavbarLink label="UMKM" href={routes("umkm")} />
-          <NavbarLink label="Login" href="/login" />
-          <NavbarLink label="Register" href="/register" />
+          <NavbarLink label="Login" href={routes("login")} />
+          <NavbarLink label="Register" href={routes("register")} />
         </Navbar>
       </header>
 

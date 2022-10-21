@@ -42,4 +42,18 @@ function PromoDetail({
     );
 }
 
+PromoDetail.propTypes = { 
+    image: PropTypes.string.isRequired, 
+    title: PropTypes.string.isRequired, 
+    umkm: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired, 
+    address: PropTypes.string.isRequired, 
+    time: PropTypes.string.isRequired, 
+    description: PropTypes.string.isRequired, 
+    link: PropTypes.string.isRequired, 
+    phone: PropTypes.string.isRequired,
+    urlDetail: PropTypes.string.isRequired,
+    urlUMKM: PropTypes.string.isRequired  
+}
+
 export default PromoDetail;

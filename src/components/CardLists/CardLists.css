@@ -3,7 +3,7 @@
 .card-lists {
     margin-top: 2em;
     display: grid;
-    gap: 3vw;
+    gap: 1.3em;
     grid-template-columns: 1fr 1fr 1fr;
 }
 

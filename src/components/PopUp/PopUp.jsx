@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { BiX } from "react-icons/bi";
 import "./PopUp.css";
 
@@ -14,6 +15,11 @@ function PopUp({ children, isOpen, closePopUp }) {
             </div>
         </div>
     );
+}
+
+PopUp.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    closePopUp: PropTypes.func.isRequired
 }
 
 export default PopUp;

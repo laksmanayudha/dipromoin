@@ -1,17 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { ActionButton, GoToButton } from "../../components/Button";
+import { GoToButton } from "../../components/Button";
 import { Tab, TabNavs, TabNavItem, TabDisplay, TabDisplayItem } from "../../components/Tab";
 import { getUMKM } from "../../utils/dummy-data";
-import { CardLists } from "../../components/CardLists"
-import { Image } from "../../components/Image";
-import { FiTrash, FiEdit3 } from "react-icons/fi";
 import { dummyPromos } from "../../utils/dummy-data";
-import { Form, Input, Select } from "../../components/Form";
-import useInput from "../../hooks/useInput";
+import withPopUp from "../../hocs/withPopUp";
+import EditProfileSection from "./EditProfileSection";
+import PromoListsSection from "./PromoListsSection";
+import PromoFormSection from "./PromoFormSection";
 import "./ProfilePage.css";
 
-function ProfilePage({ authedUser }){
+function ProfilePage({ authedUser, PopUp, openPopUp }){
 
     const { param } = useParams();
     const [profile, setProfile] = React.useState({
@@ -23,8 +22,6 @@ function ProfilePage({ authedUser }){
         city: "",
         address: "",
     });
-    
-    const [name, setName] = useInput(""); 
 
     React.useEffect(() => {
         const { error, data } = getUMKM(param);
@@ -64,59 +61,19 @@ function ProfilePage({ authedUser }){
 
                     <TabDisplay>
                         <TabDisplayItem forName="mypromo">
-                            <div className="promo-tab">
-                                <button className="promo-add">
-                                    <h4>+ Add Promo</h4>
-                                </button>
-                                <CardLists>
-                                    {dummyPromos && dummyPromos.map((promo, index) => (
-                                        <div className="promo-item" key={index}>
-                                            <Image url={promo.image} />
-                                            <div className="promo-item__actions">
-                                                <ActionButton 
-                                                    secondary 
-                                                    small
-                                                >
-                                                        <FiEdit3 />
-                                                </ActionButton>
-                                                <ActionButton 
-                                                    small
-                                                >
-                                                    <FiTrash />
-                                                </ActionButton>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </CardLists>
-                            </div>
+                            <PromoListsSection promos={dummyPromos} openPopUp={openPopUp} />
                         </TabDisplayItem>
                         <TabDisplayItem forName="editprofile">
-                            <div className="profile-tab">
-                                <Form onBackground>
-                                    <Input
-                                        horizontal
-                                        onChangeHandler={setName}
-                                        label="UMKM name"
-                                        type="text"
-                                        value={name}
-                                        placeholder="Nama UMKM..."
-                                    />
-                                    <Select
-                                        horizontal
-                                        defaultIndexValue={0} 
-                                        values={["Kota", "Denpasar", "Jakarta"]}
-                                        label="Kota"
-                                    />
-                                </Form>
-                            </div>
+                            <EditProfileSection />
                         </TabDisplayItem>
                     </TabDisplay>
                 </Tab>
             </section>
-            <section>
-            </section>
+            {PopUp(
+                <PromoFormSection></PromoFormSection>
+            )}
         </div>
     );
 }
 
-export default ProfilePage;
+export default withPopUp(ProfilePage);

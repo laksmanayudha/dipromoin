@@ -59,7 +59,7 @@
     width: 100%;
 }
 
-/* promo tab */
+/* promo lists section */
 .promo-tab {
     padding: 1em;
 }
@@ -107,7 +107,28 @@
     opacity: 1;
 }
 
-/* profile tab */
+/* promo form section */
+.promo-form-section {
+    padding: 1.3em;
+}
+
+.promo-form-date {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.3em;
+}
+
+.promo-form-date div{
+    flex: 1;
+}
+
+.promo-form-date div:nth-child(1) .form-input .form-input__label{
+    flex: 6;
+}
+
+.promo-form-date div:nth-child(1) .form-input .form-input__input{
+    flex: 8;
+}
 
 @media (max-width: 797.98px) {
     .profile-page {

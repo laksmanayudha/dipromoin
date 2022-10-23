@@ -2,9 +2,9 @@ import React from "react";
 
 function useInput(defaultValue) {
     const [input, setInput] = React.useState(defaultValue);
-    const onInputChangeHandler = (event) => {
-        console.log(event.target.value);
-        setInput(event.target.value);
+    const onInputChangeHandler = (value) => {
+        // console.log(value);
+        setInput(value);
     }
 
     return [input, onInputChangeHandler];

@@ -4,7 +4,7 @@ import { FiChevronDown } from "react-icons/fi"
 import "./Form.css";
 import { setActionOnDocumentClick } from "../../utils/onDocumentClick";
 
-function Select({ defaultIndexValue, values, label, horizontal }) {
+function Select({ defaultIndexValue, values, label, horizontal, onChangeHandler }) {
 
     const dropdown = React.useRef(null);
     const displayInput = React.useRef(null);
@@ -25,7 +25,7 @@ function Select({ defaultIndexValue, values, label, horizontal }) {
     const handleValueChange = (newIndexValue) => {
         dropdown.current.classList.toggle("select-options--open")
         setIndexValue(newIndexValue);
-
+        onChangeHandler(newIndexValue);
     }
 
     React.useEffect(() => {

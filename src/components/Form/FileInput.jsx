@@ -2,15 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Form.css";
 
-function Input({ 
+function FileInput({ 
         onChangeHandler, 
         label, 
-        type, 
-        value, 
-        placeholder, 
         name, 
         id,
-        min,
         horizontal 
     }){
 
@@ -19,25 +15,19 @@ function Input({
             {label && <label className="form-input__label" htmlFor={id}>{label}</label>}
             <input 
                 className="form-input__input" 
-                type={type} id={id} name={name}
-                onChange={(event) => { onChangeHandler(event.target.value) }} 
-                value={value} 
-                min={min}
-                placeholder={placeholder}
+                type="file" id={id} name={name}
+                onChange={(event) => { onChangeHandler(event.target.files) }} 
             />
         </div>
     );
 }
 
-Input.propTypes = {
+FileInput.propTypes = {
     onChangeHandler: PropTypes.func.isRequired, 
     label: PropTypes.string, 
-    type: PropTypes.string.isRequired, 
-    value: PropTypes.string.isRequired, 
-    placeholder: PropTypes.string, 
     name: PropTypes.string, 
     id: PropTypes.string,
     horizontal: PropTypes.bool 
 }
 
-export default Input;
+export default FileInput;

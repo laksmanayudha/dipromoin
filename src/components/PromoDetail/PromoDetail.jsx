@@ -1,6 +1,7 @@
 import React from "react";
 import { Image } from "../Image";
 import { Link } from "react-router-dom";
+import { GoToButton } from "../Button";
 import PropTypes from "prop-types";
 import "./PromoDetail.css"
 
@@ -25,8 +26,8 @@ function PromoDetail({
                     <Image url={image} />
                 </div>
                 <div className="promo-detail-header__actions">
-                    <a href={link} target="_blank" rel="noreferrer">Website</a>
-                    <a href={phone} target="_blank" rel="noreferrer">WhatsApp</a>
+                    <GoToButton label="Website" url={link} />
+                    <GoToButton label="WhatsApp" url={phone} />
                 </div>
             </header>
             <div className="promo-detail-body">

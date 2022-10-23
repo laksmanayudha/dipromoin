@@ -1,6 +1,6 @@
+@import url("../../App.css");
 
-.see-more {
-    background-color: var(--red);
+.action-button {
     border: none;
     padding: 1em 7em;
     border-radius: 8px;
@@ -9,15 +9,42 @@
     transition: .3s;
 }
 
-.see-more:hover{
-    background-color: var(--maroon);
-    /* box-shadow: 1px 1px 10px -3px var(--red); */
+.action-button--primary {
+    background-color: var(--red);
 }
 
-.see-more:active{
-    outline: none;
-    border: 1px solid var(--maroon);
+.action-button--primary:hover{
+    background-color: var(--maroon);
 }
+
+.action-button--secondary {
+    background-color: var(--green-1);
+}
+
+.action-button--secondary:hover {
+    background-color: var(--green-3);
+}
+
+.action-button--small {
+    padding: .5em 1em;
+}
+
+/* button */
+.goto-button {
+    cursor: pointer;
+    background-color: var(--green-3);
+    border-radius: 8px;
+    text-align: center;
+    color: var(--white);
+    padding: .5em 0;
+    flex: 1;
+    transition: .3s;
+}
+
+.goto-button:hover {
+    background-color: var(--green-1);
+}
+
 
 @media (max-width: 575.98px) { 
     .see-more{

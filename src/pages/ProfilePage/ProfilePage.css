@@ -1,0 +1,146 @@
+@import url("../../App.css");
+
+/* profile page */
+.profile-page {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.profile-section {
+    display: flex;
+    /* margin-top: 2em; */
+}
+
+.profile-header {
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-header__image {
+    width: 15em;
+    height: 15em;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+.profile-header__image:hover {
+    transform: scale(1);
+}
+
+.profile-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    flex: 1;
+    width: 100%;
+    padding: 0 0 0 2em;
+}
+
+.profile-body__identity {
+    display: flex;
+    flex-direction: column;
+    flex: 9;
+}
+
+.profile-body__name {
+    font-weight: bold;
+}
+
+.profile-body__description {
+    margin-top: 1em;
+}
+
+.profile-body__contacts {
+    display: flex;
+    flex: 1;
+    gap: 1em;
+    width: 100%;
+}
+
+/* promo tab */
+.promo-tab {
+    padding: 1em;
+}
+
+.promo-add {
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--green-5);
+    border: 1px solid var(--green-5);
+    border-radius: 8px;
+    padding: .5em 1em;
+    transition: .3s;
+}
+
+.promo-add:hover {
+    background-color: var(--green-5);
+    color: var(--white);
+}
+
+.promo-item {
+    width: 100%;
+    position: relative;
+}
+
+.promo-item img:hover {
+    transform: scale(.9);
+    border-radius: 8px;
+}
+
+.promo-item__actions {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    gap: .5em;
+    background-color: rgba(0, 0, 0, .77);
+    border-radius: 0 0 8px 8px;
+    padding: 1em;
+    opacity: 0;
+    transition: .3s;
+}
+
+.promo-item:hover .promo-item__actions {
+    opacity: 1;
+}
+
+/* profile tab */
+
+@media (max-width: 797.98px) {
+    .profile-page {
+        width: 90%;
+    }
+}
+
+@media (max-width: 575.98px) { 
+
+    .profile-page {
+        width: 100%;
+    }
+
+    .profile-header{
+        flex: none;
+    }
+
+    .profile-header__image {
+        width: 8em;
+        height: 8em;
+    }
+    
+    .profile-body__contacts {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 364px) { 
+    .profile-header__image {
+        display: none;
+    }
+
+    .profile-body {
+        padding: 0;
+    }
+}

@@ -79,15 +79,15 @@
     }
 
     .navbar-body__menu {
-        height: 0;
+        max-height: 0;
         overflow: hidden;
         opacity: 0;
-        transition: height .4s, opacity .3s linear .2s;
+        transition: max-height .4s ease-out, opacity .3s linear .2s;
     }
 
     .navbar-body--open{
         opacity: 1;
-        height: 250px;
+        max-height: 250px;
     }
 
     .navbar-body__nav {

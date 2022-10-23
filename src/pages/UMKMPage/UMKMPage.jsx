@@ -1,8 +1,9 @@
 import React from "react";
 import { dummyUMKM } from "../../utils/dummy-data";
 import { Card, CardLists } from "../../components/CardLists";
-import { FilterContainer, SearchFilter } from "../../components/Filter";
+import { FilterContainer } from "../../components/Filter";
 import { PageNav, Pagination } from "../../components/Pagination";
+import { Form, Input, SubmitButton } from "../../components/Form";
 import "./UMKMPage.css";
 
 function UMKMPage() {
@@ -10,7 +11,16 @@ function UMKMPage() {
     return (
         <div className="umkm-page">
             <FilterContainer >
-                <SearchFilter />
+                <Form horizontal>
+                    <Input
+                        horizontal
+                        onChangeHandler={() => {}}
+                        type="text"
+                        value={""}
+                        placeholder="Search..."
+                    />
+                    <SubmitButton label="Find" />
+                </Form>
             </FilterContainer>
             <h3 className="section-title">Search result for "UMKM"</h3>
             <CardLists isVertical={true}>

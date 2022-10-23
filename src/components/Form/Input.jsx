@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./Form.css";
 
 function Input({ 
@@ -14,7 +15,7 @@ function Input({
 
     return (
         <div className={"form-input " + (horizontal ? "form-input--horizontal" : "")}>
-            <label className="form-input__label" htmlFor="name">{label}</label>
+            {label && <label className="form-input__label" htmlFor="name">{label}</label>}
             <input 
                 className="form-input__input" 
                 type={type} id={id} name={name}
@@ -24,6 +25,17 @@ function Input({
             />
         </div>
     );
+}
+
+Input.propTypes = {
+    onChangeHandler: PropTypes.func.isRequired, 
+    label: PropTypes.string, 
+    type: PropTypes.string.isRequired, 
+    value: PropTypes.string.isRequired, 
+    placeholder: PropTypes.string, 
+    name: PropTypes.string, 
+    id: PropTypes.string,
+    horizontal: PropTypes.bool 
 }
 
 export default Input;

@@ -1,0 +1,9 @@
+@import url("../../App.css");
+
+.notfound-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--grey-1);
+}
+

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { SeeMoreButton } from "../Button";
+import { ActionButton } from "../Button";
 import { Image } from "../Image";
 
 function CarouselItem({ image, title, address, description }) {
@@ -8,7 +8,6 @@ function CarouselItem({ image, title, address, description }) {
     return (
         <div 
             className="carousel-item" 
-            // style={{ backgroundColor: bgColor }}
         >
             {/* <img className="carousel-item-header" src={image} alt="" /> */}
             <Image url={image} />
@@ -17,7 +16,7 @@ function CarouselItem({ image, title, address, description }) {
                 <small className="carousel-item-body__address">{ address }</small>
                 <p className="carousel-item-body__description">{ description }</p>
                 <div className="carousel-item-body__action">
-                    <SeeMoreButton />
+                    <ActionButton>See More</ActionButton>
                 </div>
             </div>
         </div>
@@ -29,7 +28,6 @@ CarouselItem.propTypes = {
     title: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    // bgColor: PropTypes.string.isRequired,
 };
 
 export default CarouselItem;

@@ -1,10 +1,11 @@
 import React from "react";
 import { dummyPromos } from "../../utils/dummy-data";
 import { Card, CardLists } from "../../components/CardLists";
-import { FilterContainer, SearchFilter, SelectFilter } from "../../components/Filter";
+import { FilterContainer } from "../../components/Filter";
 import { PageNav, Pagination } from "../../components/Pagination";
 import { PromoDetail, PromoWrapper } from "../../components/PromoDetail";
 import { setActionOnWindowResize, getCurrenWindowSize } from "../../utils/onWindowResize";
+import { Form, Input, Select, SubmitButton } from "../../components/Form";
 import withPopUp from "../../hocs/withPopUp";
 import "./PromoPage.css";
 
@@ -39,9 +40,26 @@ function PromoPage({ PopUp, openPopUp, closePopUp }) {
     return (
         <div className="promo-page">
             <FilterContainer >
-                <SearchFilter />
-                <SelectFilter defaultIndexValue={0} values={["Kota", "Denpasar", "Jakarta", "Surabaya", "Gianyar", "Malang"]} />
-                <SelectFilter defaultIndexValue={0} values={["Waktu", "Minggu ini", "Minggu depan", "bulan ini", "bulan depan"]} />
+                <Form horizontal>
+                    <Input
+                        horizontal
+                        onChangeHandler={() => {}}
+                        type="text"
+                        value={""}
+                        placeholder="Search..."
+                    />
+                    <Select
+                        horizontal
+                        defaultIndexValue={0} 
+                        values={["Kota", "Denpasar", "Jakarta"]} 
+                    />
+                    <Select
+                        horizontal
+                        defaultIndexValue={0} 
+                        values={["Waktu", "Minggu ini", "Bulan ini"]} 
+                    />
+                    <SubmitButton label="Find" />
+                </Form>
             </FilterContainer>
             <div className="promo-page-display">
                 <section className="promo-page-display__lists">

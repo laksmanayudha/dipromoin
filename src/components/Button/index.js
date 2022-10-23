@@ -1,6 +1,8 @@
 import "./Button.css";
-import SeeMoreButton from "./SeeMoreButton";
+import ActionButton from "./ActionButton";
+import GoToButton from "./GoToButton";
 
 export {
-    SeeMoreButton
+    ActionButton,
+    GoToButton
 };

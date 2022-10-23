@@ -2,38 +2,61 @@ import React from "react";
 import { Navbar, NavbarLink } from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
 import { Footer } from "./components/Footer";
-import { getGuestPages, routes } from "./pages";
+import { getAuthPages, getGuestPages, routes } from "./pages";
+import { getUMKM } from "./utils/dummy-data";
 import onWindowScroll from "./utils/onWindowScroll";
-import "./App.css";
 import onWindowResize from "./utils/onWindowResize";
+import onDocumentClick from "./utils/onDocumentClick";
+import "./App.css";
 
 function App() {
 
-  const [pages] = React.useState(getGuestPages());
+  const [pages, setPages] = React.useState(getGuestPages());
+  const [authedUser, setAuthedUser] = React.useState(null);
 
   React.useEffect(() => {
     onWindowScroll();
     onWindowResize();
+    onDocumentClick();
+
+    const { error, data } = getUMKM("1");
+    if (!error) {
+      setAuthedUser(data);
+      setPages([...pages, ...getAuthPages()]);
+    }
+
   }, []);
 
   return (
     <div className="App">
       {/* header */}
       <header className="App-header">
-        <Navbar>
+        <Navbar logo={"Dipromoin.id"}>
           <NavbarLink label="Home" href={routes("home")} />
           <NavbarLink label="About us" href={routes("about")} />
           <NavbarLink label="Promo" href={routes("promo")} />
           <NavbarLink label="UMKM" href={routes("umkm")} />
-          <NavbarLink label="Login" href={routes("login")} />
-          <NavbarLink label="Register" href={routes("register")} />
+
+          {authedUser != null
+          ? <NavbarLink label={authedUser.name} href={routes("profile", authedUser.id)} />
+          : <>
+              <NavbarLink label="Login" href={routes("login")} />
+              <NavbarLink label="Register" href={routes("register")} />
+            </>
+          }
         </Navbar>
       </header>
 
       {/* main content */}
       <main className="App-main">
         <Routes>
-          {pages.map((page, index) => (<Route path={page.path} element={page.el()} key={index} />))}
+          {pages.map((page, index) => (
+            <Route 
+              path={page.path} 
+              element={page.el({ authedUser })} 
+              key={index} 
+            />
+          ))}
         </Routes>
       </main>
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Carousel } from "../../components/Carousel";
 import { dummy, dummyPromo, dummyUMKM } from "../../utils/dummy-data";
 import { CardLists, Card } from "../../components/CardLists";
-import { SeeMoreButton } from "../../components/Button";
+import { ActionButton } from "../../components/Button";
 import "./HomePage.css";
 
 function HomePage() {
@@ -23,20 +23,20 @@ function HomePage() {
                     ))}
                 </CardLists>
                 <div className="section-action">
-                    <SeeMoreButton />
+                    <ActionButton>See More</ActionButton>
                 </div>
             </section>
 
             {/* umkm section */}
             <section className="umkm-section">
                 <h2 className="section-title">Find the Nearest UMKM From Your City</h2>
-                <CardLists isVertical={true} >
+                <CardLists isVertical>
                     {dummyUMKM && dummyUMKM.map((item, index) => (
-                        <Card {...item} key={index} leftHeader={true} />
+                        <Card {...item} key={index} leftHeader/>
                     ))}
                 </CardLists>
                 <div className="section-action">
-                    <SeeMoreButton />
+                    <ActionButton>See More</ActionButton>
                 </div>
             </section>
         </div>

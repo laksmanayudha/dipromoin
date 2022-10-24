@@ -126,6 +126,34 @@
     overflow: auto;
 }
 
+/* file input */
+.file {
+    padding: 1.1em;
+}
+
+.file:hover {
+    background-color: var(--white);
+    color: var(--black-1);
+}
+
+.file label{
+    cursor: pointer;
+    width: 100%;
+    display: inline-block;
+}
+
+.file--height {
+    height: 15em;
+}
+
+.file input[type=file]{
+    display: none;
+}
+
+/* image */
+.image:hover {
+    transform: scale(1);
+}
 
 @media (max-width: 991.98px) {
     .form-input__input{

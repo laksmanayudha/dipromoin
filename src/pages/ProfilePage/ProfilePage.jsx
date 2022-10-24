@@ -7,21 +7,13 @@ import { dummyPromos } from "../../utils/dummy-data";
 import withPopUp from "../../hocs/withPopUp";
 import EditProfileSection from "./EditProfileSection";
 import PromoListsSection from "./PromoListsSection";
-import PromoFormSection from "./PromoFormSection";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import "./ProfilePage.css";
 
 function ProfilePage({ authedUser, PopUp, openPopUp }){
 
     const { param } = useParams();
-    const [profile, setProfile] = React.useState({
-        name: "",
-        profileImage: "",
-        description: "",
-        phone: "",
-        link: "",
-        city: "",
-        address: "",
-    });
+    const [profile, setProfile] = React.useState(null);
 
     React.useEffect(() => {
         const { error, data } = getUMKM(param);
@@ -30,6 +22,10 @@ function ProfilePage({ authedUser, PopUp, openPopUp }){
             setProfile(data);
         }
     }, [param]);
+
+    if (!profile) {
+        return <NotFoundPage />
+    }
 
     return (
         <div className="profile-page">
@@ -61,7 +57,7 @@ function ProfilePage({ authedUser, PopUp, openPopUp }){
 
                     <TabDisplay>
                         <TabDisplayItem forName="mypromo">
-                            <PromoListsSection promos={dummyPromos} openPopUp={openPopUp} />
+                            <PromoListsSection promos={dummyPromos} openPopUp={openPopUp} PopUp={PopUp} />
                         </TabDisplayItem>
                         <TabDisplayItem forName="editprofile">
                             <EditProfileSection />
@@ -69,9 +65,6 @@ function ProfilePage({ authedUser, PopUp, openPopUp }){
                     </TabDisplay>
                 </Tab>
             </section>
-            {PopUp(
-                <PromoFormSection></PromoFormSection>
-            )}
         </div>
     );
 }

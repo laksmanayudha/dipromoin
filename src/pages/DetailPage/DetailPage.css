@@ -1,0 +1,7 @@
+@import url("../../App.css");
+
+.promo-detail-page {
+    background-color: var(--purple-5);
+    border-radius: 8px;
+    margin-bottom: 1em;
+}

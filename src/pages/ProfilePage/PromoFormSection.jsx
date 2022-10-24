@@ -4,9 +4,10 @@ import useInput from "../../hooks/useInput";
 import { FileInput, Form, Input, Select, SubmitButton, TextArea } from "../../components/Form";
 import { PromoWrapper } from "../../components/PromoDetail";
 import getToday from "../../utils/getToday";
+import { getPromo } from "../../utils/dummy-data";
 import "./ProfilePage.css";
 
-function PromoForm() {
+function PromoForm({ id }) {
 
     const [today, setToday] = React.useState(getToday());
     const [title, setTitle] = useInput(""); 
@@ -16,8 +17,27 @@ function PromoForm() {
     const [link, setLink] = useInput(""); 
     const [phone, setPhone] = useInput(""); 
     const [description, setDescription] = useInput(""); 
+    const [defaultDesc, setDefaultDesc] = useInput(""); 
     const [city, setCity] = useInput(0); 
-    const [photo, setPhoto] = useInput(""); 
+    const [photo, setPhoto] = useInput("");
+    
+    React.useEffect(() => {
+
+        const { error, data } = getPromo(id);
+        if(!error) {
+            setTitle(data.title);
+            setFrom(data.from);
+            setTo(data.to);
+            setAddress(data.address);
+            setLink(data.link);
+            setPhone(data.phone);
+            setDescription(data.description);
+            setDefaultDesc(data.description);
+            setCity(0);
+            setPhoto(data.image);
+        }
+
+    }, [id]);
 
     return (
         <PromoWrapper>
@@ -34,7 +54,9 @@ function PromoForm() {
                     <FileInput
                         horizontal
                         onChangeHandler={setPhoto}
+                        value={photo}
                         label="Foto Profile"
+                        id="foto"
                     />
                     <div className="promo-form-date">
                         <div>
@@ -93,7 +115,7 @@ function PromoForm() {
                         horizontal
                         label="Description"
                         placeholder="Deskripsi..."
-                        value={description}
+                        value={defaultDesc}
                         onInputHandler={setDescription}
                     />
                     <SubmitButton label="Simpan" />

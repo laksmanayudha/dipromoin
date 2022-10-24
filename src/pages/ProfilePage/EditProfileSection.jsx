@@ -28,6 +28,8 @@ function EditProfileSection() {
                 <FileInput
                     horizontal
                     onChangeHandler={setPhoto}
+                    id="foto"
+                    value={photo}
                     label="Foto Profile"
                 />
                 <Select

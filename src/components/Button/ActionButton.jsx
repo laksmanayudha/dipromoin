@@ -7,7 +7,10 @@ function ActionButton({ action, children, secondary, small }) {
     if (secondary) {
         return (
             <button 
-                onClick={ action } 
+                onClick={ (event) => {
+                    event.stopPropagation();
+                    action()
+                } } 
                 className={"action-button action-button--secondary " + (small ? "action-button--small" : "")}
             >
                 {children}
@@ -17,7 +20,10 @@ function ActionButton({ action, children, secondary, small }) {
     
     return (
         <button 
-            onClick={ action } 
+            onClick={ (event) => {
+                event.stopPropagation();
+                action()
+            } } 
             className={"action-button action-button--primary " + (small ? "action-button--small" : "")}
         >
             {children}

@@ -96,7 +96,8 @@ img {
 .promo-page,
 .login-page,
 .register-page,
-.profile-page {
+.profile-page,
+.promo-detail-page {
     animation: fadeIn 1s ease-out;
     padding: 1em 2em 0;
 }
@@ -108,7 +109,8 @@ img {
 .login-page,
 .register-page,
 .profile-page,
-.notfound-page {
+.notfound-page,
+.promo-detail-page {
     /* display: flex;
     flex-direction: column;
     justify-content: center; */

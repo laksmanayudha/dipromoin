@@ -64,8 +64,47 @@ const dummyUMKM = [
     }
 ]
 
+/* something dummy
+<Card
+    image= "/images/chef.jpg"
+    title= "Soft Promo Diskon 20% Off !! Buruan Daftar..."
+    subtitle= "Gatau - 16 Agustus 2021"
+    description= "Beli 3 potong pakaian dengan total minimal pembelian Rp 120.000 dapatkan gratis 1 baju bebas pilih berdasarkan..."
+/>
+*/ 
+
+const dummyCities = [
+    {
+        id: "1",
+        name: "Jakarta"
+    },
+    {
+        id: "2",
+        name: "Denpasar"
+    },
+    {
+        id: "3",
+        name: "Surabaya"
+    },
+    {
+        id: "5",
+        name: "Yogayakarta"
+    },
+    {
+        id: "6",
+        name: "Aceh"
+    },
+    {
+        id: "7",
+        name: "Bandung"
+    },
+];
+
 const dummyPromos = [
     {
+        id: "1",
+        from: "2022-10-23",
+        to: "2022-10-26",
         image: "/images/opening-3.jpg", 
         title: "Grand Opening Diskon 50%", 
         umkm: "Kiosko Restaurant", 
@@ -94,6 +133,9 @@ const dummyPromos = [
         urlUMKM: "/umkm" 
     },
     {
+        id: "2",
+        from: "2022-10-23",
+        to: "2022-10-26",
         image: "/images/opening-2.jpg", 
         title: "Soft Diskon 20% off", 
         umkm: "Pondok Indah", 
@@ -109,6 +151,9 @@ const dummyPromos = [
         urlUMKM: "/umkm" 
     },
     {
+        id: "3",
+        from: "2022-10-23",
+        to: "2022-10-26",
         image: "/images/opening-1.jpg", 
         title: "Beli 1 Gratis 1", 
         umkm: "MeeNUM", 
@@ -124,6 +169,9 @@ const dummyPromos = [
         urlUMKM: "/umkm" 
     },
     {
+        id: "4",
+        from: "2022-10-23",
+        to: "2022-10-26",
         image: "/images/opening-2.jpg", 
         title: "Soft Diskon 20% off", 
         umkm: "Pondok Indah", 
@@ -139,6 +187,9 @@ const dummyPromos = [
         urlUMKM: "/umkm" 
     },
     {
+        id: "5",
+        from: "2022-10-23",
+        to: "2022-10-26",
         image: "/images/opening-3.jpg", 
         title: "Grand Opening Diskon 50%", 
         umkm: "Kiosko Restaurant", 
@@ -191,19 +242,21 @@ const dummyUMKMProfile = [
     },
 ]
 
-/* something dummy
-<Card
-    image= "/images/chef.jpg"
-    title= "Soft Promo Diskon 20% Off !! Buruan Daftar..."
-    subtitle= "Gatau - 16 Agustus 2021"
-    description= "Beli 3 potong pakaian dengan total minimal pembelian Rp 120.000 dapatkan gratis 1 baju bebas pilih berdasarkan..."
-/>
-*/ 
-
 const getUMKM = (id) => {
     const user = dummyUMKMProfile.find(umkm => umkm.id === id);
+    if (!user) {
+        return { error: true, data: null };
+    }
     return { error: false, data: user };
-  }
+}
+
+const getPromo = (id) => {
+    const promo = dummyPromos.find(promo => promo.id === id);
+    if (!promo) {
+        return { error: true, data: null };
+    }
+    return { error: false, data: promo };
+}
 
 export { 
     dummy, 
@@ -211,5 +264,6 @@ export {
     dummyUMKM, 
     dummyPromos,
     dummyUMKMProfile,
-    getUMKM 
+    getUMKM,
+    getPromo 
 };

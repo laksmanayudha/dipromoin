@@ -6,6 +6,7 @@ import LoginPage from "./LoginPage/LoginPage";
 import RegisterPage from "./RegisterPage/RegisterPage";
 import ProfilePage from "./ProfilePage/ProfilePage";
 import NotFoundPage from "./NotFoundPage/NotFoundPage";
+import DetailPage from "./DetailPage/DetailPage";
 
 const authPages = [
 
@@ -46,6 +47,11 @@ const guestPages = [
         name: "profile",
         path: "/profile/:param",
         el: (props) => (<ProfilePage {...props} />)
+    },
+    {
+        name: "promoDetail",
+        path: "/promo/:param",
+        el: (props) => (<DetailPage {...props} />)
     },
     {
         name: "notfound",

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { GoToButton } from "../../components/Button";
 import { Tab, TabNavs, TabNavItem, TabDisplay, TabDisplayItem } from "../../components/Tab";
@@ -10,7 +11,7 @@ import PromoListsSection from "./PromoListsSection";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import "./ProfilePage.css";
 
-function ProfilePage({ authedUser, PopUp, openPopUp }){
+function ProfilePage({ authedUser, PopUp, openPopUp, onClosePopUp }){
 
     const { param } = useParams();
     const [profile, setProfile] = React.useState(null);
@@ -57,7 +58,12 @@ function ProfilePage({ authedUser, PopUp, openPopUp }){
 
                     <TabDisplay>
                         <TabDisplayItem forName="mypromo">
-                            <PromoListsSection promos={dummyPromos} openPopUp={openPopUp} PopUp={PopUp} />
+                            <PromoListsSection 
+                                promos={dummyPromos} 
+                                openPopUp={openPopUp} 
+                                PopUp={PopUp} 
+                                onClosePopUp={onClosePopUp}
+                            />
                         </TabDisplayItem>
                         <TabDisplayItem forName="editprofile">
                             <EditProfileSection />
@@ -67,6 +73,10 @@ function ProfilePage({ authedUser, PopUp, openPopUp }){
             </section>
         </div>
     );
+}
+
+ProfilePage.propTypes = {
+    authedUser: PropTypes.object
 }
 
 export default withPopUp(ProfilePage);

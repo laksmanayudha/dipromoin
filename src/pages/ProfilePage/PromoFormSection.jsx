@@ -7,7 +7,7 @@ import getToday from "../../utils/getToday";
 import { getPromo } from "../../utils/dummy-data";
 import "./ProfilePage.css";
 
-function PromoForm({ id }) {
+function PromoForm({ id, setCurrentPromoId, onClosePopUp }) {
 
     const [today, setToday] = React.useState(getToday());
     const [title, setTitle] = useInput(""); 
@@ -17,26 +17,47 @@ function PromoForm({ id }) {
     const [link, setLink] = useInput(""); 
     const [phone, setPhone] = useInput(""); 
     const [description, setDescription] = useInput(""); 
-    const [defaultDesc, setDefaultDesc] = useInput(""); 
+    // const [defaultDesc, setDefaultDesc] = useInput(""); 
     const [city, setCity] = useInput(0); 
     const [photo, setPhoto] = useInput("");
+
+    const resetInput = () => {
+        setTitle("");
+        setFrom("");
+        setTo("");
+        setAddress("");
+        setLink("");
+        setPhone("");
+        setDescription("");
+        // setDefaultDesc("");
+        setCity(0);
+        setPhoto("");
+    }
+
+    React.useEffect(() => {
+        onClosePopUp(() => {
+            setCurrentPromoId(null);
+            resetInput();
+        });
+    }, []);
     
     React.useEffect(() => {
 
-        const { error, data } = getPromo(id);
-        if(!error) {
-            setTitle(data.title);
-            setFrom(data.from);
-            setTo(data.to);
-            setAddress(data.address);
-            setLink(data.link);
-            setPhone(data.phone);
-            setDescription(data.description);
-            setDefaultDesc(data.description);
-            setCity(0);
-            setPhoto(data.image);
+        if (id != null) {
+            const { error, data } = getPromo(id);
+            if(!error) {
+                setTitle(data.title);
+                setFrom(data.from);
+                setTo(data.to);
+                setAddress(data.address);
+                setLink(data.link);
+                setPhone(data.phone);
+                setDescription(data.description);
+                // setDefaultDesc(data.description);
+                setCity(0);
+                setPhoto(data.image);
+            }
         }
-
     }, [id]);
 
     return (
@@ -65,7 +86,7 @@ function PromoForm({ id }) {
                                 onChangeHandler={setFrom}
                                 label="Mulai"
                                 type="date"
-                                min={today}
+                                min={from || today}
                                 value={from}
                             />
                         </div>
@@ -75,7 +96,8 @@ function PromoForm({ id }) {
                                 onChangeHandler={setTo}
                                 label="Berakhir"
                                 type="date"
-                                min={from}
+                                min={from || today}
+                                disabled={from ? false : true}
                                 value={to}
                             />
                         </div>
@@ -115,7 +137,7 @@ function PromoForm({ id }) {
                         horizontal
                         label="Description"
                         placeholder="Deskripsi..."
-                        value={defaultDesc}
+                        value={description}
                         onInputHandler={setDescription}
                     />
                     <SubmitButton label="Simpan" />
@@ -123,6 +145,12 @@ function PromoForm({ id }) {
             </div>
         </PromoWrapper>
     );
+}
+
+PromoForm.propTypes = {
+    id: PropTypes.string, 
+    setCurrentPromoId: PropTypes.func, 
+    onClosePopUp: PropTypes.func
 }
 
 export default PromoForm;

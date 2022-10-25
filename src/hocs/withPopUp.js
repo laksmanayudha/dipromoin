@@ -2,13 +2,23 @@ import React from "react";
 import PopUp from "../components/PopUp/PopUp";
 
 function withPopUp(Component) {
-    return () => {
+    return (props) => {
         const [isOpen, setIsOpen] = React.useState(false);
+        const [callbacks, setCallbacks] = React.useState([]);
         const openPopUp = () => { setIsOpen(true); }
-        const closePopUp = () => { setIsOpen(false); }
+        const closePopUp = () => { 
+            callbacks.forEach(callback => {
+                callback();
+            });
+            setIsOpen(false); 
+        }
+        const onClosePopUp = (callback) => { 
+            setCallbacks((prevCallback) => ([...prevCallback, callback]));
+         }
         return (
             <>
                 <Component 
+                    {...props}
                     // "render props" technique
                     PopUp={(content) => {
                         return (
@@ -22,6 +32,7 @@ function withPopUp(Component) {
                     // PopUp={PopUp}
                     openPopUp={openPopUp}
                     closePopUp={closePopUp}
+                    onClosePopUp={onClosePopUp}
                 />
             </>
         )

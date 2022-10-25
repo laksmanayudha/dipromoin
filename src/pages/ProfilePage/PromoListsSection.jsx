@@ -9,21 +9,50 @@ import { getPromo } from "../../utils/dummy-data";
 import { PromoDetail, PromoWrapper } from "../../components/PromoDetail";
 import "./ProfilePage.css";
 
-function PromoListsSection({ promos, openPopUp, PopUp }) {
+function PromoListsSection({ promos, openPopUp, PopUp, onClosePopUp }) {
 
     const [currentPromoId, setCurrentPromoId] = React.useState(null);
+    const [currentPromo, setCurrentPromo] = React.useState(null);
     const [popUpStatus, setPopUpStatus] = React.useState("add"); // add, edit, detail
+    const [actionClick, setActionClick] = React.useState(false);
 
     const onAddClick = () => {
         setPopUpStatus("add");
-        openPopUp();
+        setActionClick(true);
     }
 
     const onEditClick = (id) => {
         setPopUpStatus("edit");
         setCurrentPromoId(id);
-        openPopUp();
+        setActionClick(true);
     }
+
+    const onDetailClick = (id) => {
+        setPopUpStatus("detail");
+        setCurrentPromoId(id);
+        setActionClick(true);
+    }
+
+    React.useEffect(() => {
+        onClosePopUp(() => {
+            setActionClick(false);
+        });
+    }, []);
+
+    React.useEffect(() => {
+        if (currentPromoId != null) {
+            const { error, data } = getPromo(currentPromoId);
+            if (!error) {
+                setCurrentPromo(data);
+            }
+        }
+    }, [currentPromoId]);
+
+    React.useEffect(() => {
+        if (actionClick) {
+            openPopUp();
+        }
+    }, [actionClick]);
 
     return (
         <>
@@ -33,7 +62,7 @@ function PromoListsSection({ promos, openPopUp, PopUp }) {
                 </button>
                 <CardLists>
                     {promos && promos.map((promo, index) => (
-                        <div className="promo-item" key={index} onClick={() => {  }}>
+                        <div className="promo-item" key={index} onClick={() => { onDetailClick(promo.id) }}>
                             <Image url={promo.image} />
                             <div className="promo-item__actions">
                                 <ActionButton 
@@ -53,12 +82,36 @@ function PromoListsSection({ promos, openPopUp, PopUp }) {
                     ))}
                 </CardLists>
             </div>
-            {popUpStatus === "add" && PopUp(<PromoFormSection />)}
+            {(popUpStatus === "add" && currentPromoId == null) && PopUp(
+                <PromoFormSection 
+                    id={null} 
+                    setCurrentPromoId={setCurrentPromoId} 
+                    onClosePopUp={onClosePopUp} 
+                />
+            )}
 
             {(popUpStatus === "edit" && currentPromoId != null) && PopUp(
-                <PromoFormSection id={currentPromoId} />
+                <PromoFormSection 
+                    id={currentPromoId} 
+                    setCurrentPromoId={setCurrentPromoId} 
+                    onClosePopUp={onClosePopUp}
+                />
+            )}
+
+            {(popUpStatus === "detail" && currentPromo != null) && PopUp(
+                <PromoWrapper>
+                    <PromoDetail {...currentPromo} />
+                </PromoWrapper>
             )}
         </>
     );
 }
+
+PromoListsSection.propTypes = {
+    promos: PropTypes.arrayOf(PropTypes.object).isRequired, 
+    openPopUp: PropTypes.func, 
+    PopUp: PropTypes.func, 
+    onClosePopUp: PropTypes.func
+}
+
 export default PromoListsSection;

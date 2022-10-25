@@ -66,7 +66,10 @@ function Select({ defaultIndexValue, values, label, horizontal, onChangeHandler 
 
 Select.propTypes = {
     defaultIndexValue: PropTypes.number.isRequired,
-    values: PropTypes.arrayOf(PropTypes.string).isRequired
+    values: PropTypes.arrayOf(PropTypes.string).isRequired,
+    onChangeHandler: PropTypes.func.isRequired,
+    label: PropTypes.string,
+    horizontal: PropTypes.bool, 
 }
 
 export default Select;

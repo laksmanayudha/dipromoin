@@ -11,6 +11,7 @@ function Input({
         name, 
         id,
         min,
+        disabled,
         horizontal 
     }){
 
@@ -24,6 +25,7 @@ function Input({
                 value={value} 
                 min={min}
                 placeholder={placeholder}
+                disabled={disabled ? true : false}
             />
         </div>
     );

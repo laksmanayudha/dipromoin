@@ -10,13 +10,12 @@ function PromoDetail({
         title, 
         umkm,
         city, 
-        address, 
-        time, 
+        address,  
         description, 
-        link, 
+        link,
+        from,
+        to, 
         phone,
-        urlDetail,
-        urlUMKM  
     }){
 
     return (
@@ -31,10 +30,10 @@ function PromoDetail({
                 </div>
             </header>
             <div className="promo-detail-body">
-                <h3 className="promo-detail-body__title"><Link to={urlDetail}>{title}</Link></h3>
-                <small className="promo-detail-body__umkm"><Link to={urlUMKM}>{umkm}</Link></small> <br />
+                <h3 className="promo-detail-body__title"><Link to={""}>{title}</Link></h3>
+                <small className="promo-detail-body__umkm"><Link to={""}>{umkm}</Link></small> <br />
                 <small className="promo-detail-body__address">{city} - {address}</small> <br />
-                <small className="promo-detail-body__time">{time}</small> <br />
+                <small className="promo-detail-body__time">{from} - {to}</small> <br />
                 <div className="promo-detail-body__description">
                 {description}
                 </div>
@@ -53,8 +52,6 @@ PromoDetail.propTypes = {
     description: PropTypes.string.isRequired, 
     link: PropTypes.string.isRequired, 
     phone: PropTypes.string.isRequired,
-    urlDetail: PropTypes.string.isRequired,
-    urlUMKM: PropTypes.string.isRequired  
 }
 
 export default PromoDetail;

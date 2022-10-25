@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ActionButton } from "../Button";
 import { Image } from "../Image";
+import "./Carousel.css";
 
-function CarouselItem({ image, title, address, description }) {
+function CarouselItem({ image, title, subtitle, description, onClick }) {
 
     return (
         <div 
@@ -13,10 +14,10 @@ function CarouselItem({ image, title, address, description }) {
             <Image url={image} />
             <div className="carousel-item-body">
                 <h2 className="carousel-item-body__title">{ title }</h2>
-                <small className="carousel-item-body__address">{ address }</small>
+                <small className="carousel-item-body__subtitle">{ subtitle }</small>
                 <p className="carousel-item-body__description">{ description }</p>
                 <div className="carousel-item-body__action">
-                    <ActionButton>See More</ActionButton>
+                    <ActionButton action={onClick}>See More</ActionButton>
                 </div>
             </div>
         </div>
@@ -26,7 +27,7 @@ function CarouselItem({ image, title, address, description }) {
 CarouselItem.propTypes = {
     image: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
 };
 

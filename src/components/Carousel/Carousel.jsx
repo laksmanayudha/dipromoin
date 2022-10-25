@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./Carousel.css";
 import CarouselItem from "./CarouselItem";
 import { getRandomColors } from "../../utils/randomColors";
+import "./Carousel.css";
 
-function Carousel({ items }) {
+function Carousel({ items, onClick }) {
 
     const [selectedIndex, setSelectedIndex] = React.useState(0);
     const [isFade, setIsFade] = React.useState(false);
@@ -33,7 +33,7 @@ function Carousel({ items }) {
         }
     }, [selectedIndex])
 
-    if(!items) {
+    if(items.length === 0) {
         return null;
     }
 
@@ -46,9 +46,10 @@ function Carousel({ items }) {
             <CarouselItem 
                 image={items[selectedIndex].image}
                 title={items[selectedIndex].title}
-                address={items[selectedIndex].address}
+                subtitle={items[selectedIndex].subtitle}
                 description={items[selectedIndex].description}
                 bgColor={backgroundColors[selectedIndex]}
+                onClick={onClick}
             />
 
             <div className="carousel-pagination" >

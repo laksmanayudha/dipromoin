@@ -6,6 +6,7 @@ function Form({ children, onBackground, horizontal, onSubmitHandler}) {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        onSubmitHandler();
     }
 
     return (

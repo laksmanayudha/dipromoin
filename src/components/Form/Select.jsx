@@ -4,11 +4,20 @@ import { FiChevronDown } from "react-icons/fi"
 import "./Form.css";
 import { setActionOnDocumentClick } from "../../utils/onDocumentClick";
 
-function Select({ defaultIndexValue, values, label, horizontal, onChangeHandler }) {
+const findIndex = (values, key) => {
+    const index =  values.findIndex(value => value.key === key);
+    if (index === -1) {
+        return 0;
+    }
+    return index;
+}
+
+function Select({ defaultKeyValue, values, label, horizontal, onChangeHandler }) {
 
     const dropdown = React.useRef(null);
     const displayInput = React.useRef(null);
-    const [indexValue, setIndexValue] = React.useState(defaultIndexValue || 0);
+    // const [indexValue, setIndexValue] = React.useState(findIndex(values, defaultKeyValue));
+    const indexValue = findIndex(values, defaultKeyValue);
 
     const handleToggle = () => {
         dropdown.current.classList.toggle("select-options--open")
@@ -24,7 +33,7 @@ function Select({ defaultIndexValue, values, label, horizontal, onChangeHandler 
 
     const handleValueChange = (newIndexValue) => {
         dropdown.current.classList.toggle("select-options--open")
-        setIndexValue(newIndexValue);
+        // setIndexValue(newIndexValue);
         onChangeHandler(newIndexValue);
     }
 
@@ -45,7 +54,7 @@ function Select({ defaultIndexValue, values, label, horizontal, onChangeHandler 
             {label && <label htmlFor="" className="form-input__label">{label}</label>}
             <div className="select form-input__input">
                 <div className="select-display" onClick={handleToggle} ref={displayInput}>
-                    <span>{values && values[indexValue] }</span>
+                    <span>{values && values[indexValue].value }</span>
                     <FiChevronDown />
                 </div>
                 <ul className="select-options" ref={dropdown}>
@@ -53,9 +62,9 @@ function Select({ defaultIndexValue, values, label, horizontal, onChangeHandler 
                         <li 
                             className="select-options__item" 
                             key={index}
-                            onClick={() => { handleValueChange(index) }}
+                            onClick={() => { handleValueChange(value.key) }}
                         >
-                            { value }
+                            { value.value }
                         </li>
                     ))}
                 </ul>
@@ -65,8 +74,8 @@ function Select({ defaultIndexValue, values, label, horizontal, onChangeHandler 
 }
 
 Select.propTypes = {
-    defaultIndexValue: PropTypes.number.isRequired,
-    values: PropTypes.arrayOf(PropTypes.string).isRequired,
+    defaultKeyValue: PropTypes.string.isRequired,
+    values: PropTypes.arrayOf(PropTypes.object).isRequired,
     onChangeHandler: PropTypes.func.isRequired,
     label: PropTypes.string,
     horizontal: PropTypes.bool, 

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { GoToButton } from "../../components/Button";
 import { Tab, TabNavs, TabNavItem, TabDisplay, TabDisplayItem } from "../../components/Tab";
-import { getUMKM } from "../../utils/dummy-data";
+import { getCity, getUMKM, getUMKMPromos } from "../../utils/dummy-data";
 import { dummyPromos } from "../../utils/dummy-data";
 import withPopUp from "../../hocs/withPopUp";
 import EditProfileSection from "./EditProfileSection";
@@ -15,12 +15,19 @@ function ProfilePage({ authedUser, PopUp, openPopUp, onClosePopUp }){
 
     const { param } = useParams();
     const [profile, setProfile] = React.useState(null);
+    const [promos, setPromos] = React.useState([]);
 
     React.useEffect(() => {
-        const { error, data } = getUMKM(param);
+        // get UMKM Profile
+        const dataProfile = getUMKM(param);
+        if (!dataProfile.error) {
+            setProfile(dataProfile.data);
+        }
 
-        if (!error) {
-            setProfile(data);
+        // get UMKM Promos
+        const dataPromos = getUMKMPromos(param);
+        if (!dataPromos.error) {
+            setPromos(dataPromos.data);
         }
     }, [param]);
 
@@ -37,7 +44,7 @@ function ProfilePage({ authedUser, PopUp, openPopUp, onClosePopUp }){
                 <div className="profile-body">
                     <div className="profile-body__identity">
                         <h2 className="profile-body__name">{profile.name}</h2>
-                        <small className="profile-body__city">{profile.city}</small>
+                        <small className="profile-body__city">{getCity(profile.city)}</small>
                         <small className="profile-body__address">{profile.address}</small>
                         <div className="profile-body__description">
                             {profile.description}
@@ -45,7 +52,7 @@ function ProfilePage({ authedUser, PopUp, openPopUp, onClosePopUp }){
                     </div>
                     <div className="profile-body__contacts">
                         <GoToButton label="Website" url={profile.link} />
-                        <GoToButton label="WhatsApp" url={profile.phone} />
+                        <GoToButton label="WhatsApp" url={"https://wa.me/" + profile.phone} />
                     </div>
                 </div>
             </section>
@@ -53,16 +60,17 @@ function ProfilePage({ authedUser, PopUp, openPopUp, onClosePopUp }){
                 <Tab>
                     <TabNavs defaultTab="mypromo">
                         <TabNavItem name="mypromo">My Promo</TabNavItem>
-                        <TabNavItem name="editprofile">Edit Profile</TabNavItem>
+                        {authedUser != null && <TabNavItem name="editprofile">Edit Profile</TabNavItem>}
                     </TabNavs>
 
                     <TabDisplay>
                         <TabDisplayItem forName="mypromo">
                             <PromoListsSection 
-                                promos={dummyPromos} 
+                                promos={promos} 
                                 openPopUp={openPopUp} 
                                 PopUp={PopUp} 
                                 onClosePopUp={onClosePopUp}
+                                authedUser={authedUser}
                             />
                         </TabDisplayItem>
                         <TabDisplayItem forName="editprofile">

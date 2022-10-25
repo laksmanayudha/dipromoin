@@ -3,15 +3,23 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./Pagination.css";
 
-function PageNav({ href, label, isActive }) {
+function PageNav({ label, isActive, onPageChange }) {
     
-    return <li className={"pagination-nav " + (isActive ? "pagination--active" : "")}><Link to={href}>{ label }</Link></li>;
+    return (
+        <li 
+            className={"pagination-nav " + (isActive ? "pagination--active" : "")}
+            onClick={onPageChange}
+        >
+            <Link>{ label }</Link>
+        </li>
+    );
+
 }
 
 PageNav.propTypes = {
-    href: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.number.isRequired,
     isActive: PropTypes.bool,
+    onPageChange: PropTypes.func
 }
 
 export default PageNav;

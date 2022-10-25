@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, NavbarLink } from "./components/Navbar";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Footer } from "./components/Footer";
 import { getAuthPages, getGuestPages, routes } from "./pages";
 import { getUMKM } from "./utils/dummy-data";
@@ -11,21 +11,29 @@ import "./App.css";
 
 function App() {
 
-  const [pages, setPages] = React.useState(getGuestPages());
+  const [pages, setPages] = React.useState([...getGuestPages(), ...getAuthPages()]);
   const [authedUser, setAuthedUser] = React.useState(null);
+  const { pathname } = useLocation();
 
   React.useEffect(() => {
     onWindowScroll();
     onWindowResize();
     onDocumentClick();
 
-    const { error, data } = getUMKM("1");
+    // set the getUMKM parameter to "0" to action as guest
+    // set the getUMKM parameter to "1" or another umkm id to action as authed UMKM
+    // see the data on /src/utils/dummy-data.js
+    const { error, data } = getUMKM("0");
     if (!error) {
       setAuthedUser(data);
-      setPages([...pages, ...getAuthPages()]);
+      setPages(getAuthPages());
     }
 
   }, []);
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <div className="App">

@@ -9,7 +9,7 @@ import { getPromo } from "../../utils/dummy-data";
 import { PromoDetail, PromoWrapper } from "../../components/PromoDetail";
 import "./ProfilePage.css";
 
-function PromoListsSection({ promos, openPopUp, PopUp, onClosePopUp }) {
+function PromoListsSection({ promos, openPopUp, PopUp, onClosePopUp, authedUser }) {
 
     const [currentPromoId, setCurrentPromoId] = React.useState(null);
     const [currentPromo, setCurrentPromo] = React.useState(null);
@@ -57,27 +57,32 @@ function PromoListsSection({ promos, openPopUp, PopUp, onClosePopUp }) {
     return (
         <>
             <div className="promo-tab">
-                <button className="promo-add" onClick={onAddClick} >
-                    <h4>+ Add Promo</h4>
-                </button>
+                {authedUser != null && (
+                    <button className="promo-add" onClick={onAddClick} >
+                        <h4>+ Add Promo</h4>
+                    </button>
+                )}
                 <CardLists>
+                    {promos.length === 0 && <h4 style={{ color: "var(--grey-1)" }}>Belum Ada Promo</h4>}
                     {promos && promos.map((promo, index) => (
                         <div className="promo-item" key={index} onClick={() => { onDetailClick(promo.id) }}>
                             <Image url={promo.image} />
-                            <div className="promo-item__actions">
-                                <ActionButton 
-                                    secondary 
-                                    small
-                                    action={() => { onEditClick(promo.id) }}
-                                >
-                                    <FiEdit3 />
-                                </ActionButton>
-                                <ActionButton 
-                                    small
-                                >
-                                    <FiTrash />
-                                </ActionButton>
-                            </div>
+                            {authedUser != null && (
+                                <div className="promo-item__actions">
+                                    <ActionButton 
+                                        secondary 
+                                        small
+                                        action={() => { onEditClick(promo.id) }}
+                                    >
+                                        <FiEdit3 />
+                                    </ActionButton>
+                                    <ActionButton 
+                                        small
+                                    >
+                                        <FiTrash />
+                                    </ActionButton>
+                                </div>
+                            )}
                         </div>
                     ))}
                 </CardLists>

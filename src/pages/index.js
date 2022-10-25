@@ -8,11 +8,20 @@ import ProfilePage from "./ProfilePage/ProfilePage";
 import NotFoundPage from "./NotFoundPage/NotFoundPage";
 import DetailPage from "./DetailPage/DetailPage";
 
-const authPages = [
-
+const guestPages = [
+    {
+        name: "login",
+        path: "/login",
+        el: () => (<LoginPage />)
+    },
+    {
+        name: "register",
+        path: "/register",
+        el: () => (<RegisterPage />)
+    },
 ];
 
-const guestPages = [
+const authPages = [
     {
         name: "home",
         path: "/",
@@ -32,16 +41,6 @@ const guestPages = [
         name: "promo",
         path: "/promo",
         el: () => (<PromoPage />)
-    },
-    {
-        name: "login",
-        path: "/login",
-        el: () => (<LoginPage />)
-    },
-    {
-        name: "register",
-        path: "/register",
-        el: () => (<RegisterPage />)
     },
     {
         name: "profile",

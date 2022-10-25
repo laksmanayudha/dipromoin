@@ -5,6 +5,7 @@ import { FileInput, Form, Input, Select, SubmitButton, TextArea } from "../../co
 import { PromoWrapper } from "../../components/PromoDetail";
 import getToday from "../../utils/getToday";
 import { getPromo } from "../../utils/dummy-data";
+import { getCities } from "../../utils/dummy-data";
 import "./ProfilePage.css";
 
 function PromoForm({ id, setCurrentPromoId, onClosePopUp }) {
@@ -18,8 +19,12 @@ function PromoForm({ id, setCurrentPromoId, onClosePopUp }) {
     const [phone, setPhone] = useInput(""); 
     const [description, setDescription] = useInput(""); 
     // const [defaultDesc, setDefaultDesc] = useInput(""); 
-    const [city, setCity] = useInput(0); 
+    const [city, setCity] = useInput("0"); 
     const [photo, setPhoto] = useInput("");
+
+    // city options
+    let cities = getCities().map(city => ({ key: city.id, value: city.name }));
+    cities = [{key: "0", value: "Pilih Kota"}, ...cities];
 
     const resetInput = () => {
         setTitle("");
@@ -30,7 +35,7 @@ function PromoForm({ id, setCurrentPromoId, onClosePopUp }) {
         setPhone("");
         setDescription("");
         // setDefaultDesc("");
-        setCity(0);
+        setCity("0");
         setPhoto("");
     }
 
@@ -54,7 +59,7 @@ function PromoForm({ id, setCurrentPromoId, onClosePopUp }) {
                 setPhone(data.phone);
                 setDescription(data.description);
                 // setDefaultDesc(data.description);
-                setCity(0);
+                setCity(data.city);
                 setPhoto(data.image);
             }
         }
@@ -104,8 +109,8 @@ function PromoForm({ id, setCurrentPromoId, onClosePopUp }) {
                     </div>
                     <Select
                         horizontal
-                        defaultIndexValue={city} 
-                        values={["Pilih Kota", "Denpasar", "Jakarta"]}
+                        defaultKeyValue={city} 
+                        values={cities}
                         label="Kota UMKM"
                         onChangeHandler={setCity}
                     />

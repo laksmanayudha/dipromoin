@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import useInput from "../../hooks/useInput";
+import { getCities } from "../../utils/dummy-data";
 import { FileInput, Form, Input, Select, SubmitButton, TextArea } from "../../components/Form";
 import "./ProfilePage.css";
 
@@ -11,8 +12,13 @@ function EditProfileSection() {
     const [link, setLink] = useInput(""); 
     const [phone, setPhone] = useInput(""); 
     const [description, setDescription] = useInput(""); 
-    const [city, setCity] = useInput(0); 
+    const [city, setCity] = useInput("0"); 
     const [photo, setPhoto] = useInput(""); 
+
+
+    // city options
+    let cities = getCities().map(city => ({ key: city.id, value: city.name }));
+    cities = [{key: "0", value: "Pilih Kota"}, ...cities];
 
     return (
         <div className="profile-tab">
@@ -34,8 +40,8 @@ function EditProfileSection() {
                 />
                 <Select
                     horizontal
-                    defaultIndexValue={city} 
-                    values={["Pilih Kota", "Denpasar", "Jakarta"]}
+                    defaultKeyValue={city} 
+                    values={cities}
                     label="Kota UMKM"
                     onChangeHandler={setCity}
                 />

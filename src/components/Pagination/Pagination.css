@@ -12,6 +12,10 @@
     border-radius: 8px;
 }
 
+.pagination-nav a {
+    color: var(--black-1);
+}
+
 .pagination--active a {
     color: var(--red);
     font-weight: bold;

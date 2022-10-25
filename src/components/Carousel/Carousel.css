@@ -44,7 +44,7 @@
     text-overflow: ellipsis;
 }
 
-.carousel-item-body__address {
+.carousel-item-body__subtitle {
     color: var(--grey-3);
     display: -webkit-box;
     -webkit-line-clamp: 1;

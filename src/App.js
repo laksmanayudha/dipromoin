@@ -1,9 +1,10 @@
 import React from "react";
 import { Navbar, NavbarLink } from "./components/Navbar";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { Footer } from "./components/Footer";
 import { getAuthPages, getGuestPages, routes } from "./pages";
-import { getUMKM } from "./utils/dummy-data";
+import { getAuthUMKM } from "./utils/dummy-data";
+import { putAccessToken } from "./utils/dummy-data";
 import onWindowScroll from "./utils/onWindowScroll";
 import onWindowResize from "./utils/onWindowResize";
 import onDocumentClick from "./utils/onDocumentClick";
@@ -14,6 +15,23 @@ function App() {
   const [pages, setPages] = React.useState([...getGuestPages(), ...getAuthPages()]);
   const [authedUser, setAuthedUser] = React.useState(null);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    setAuthedUser(null);
+    putAccessToken("");
+    setPages([...getGuestPages(), ...getAuthPages()]);
+    navigate(routes("home"));
+  }
+
+  const onLoginSuccess = (accessToken) => {
+    putAccessToken(accessToken);
+    const { error, data } = getAuthUMKM();
+    if (!error) {
+      setAuthedUser(data);
+      navigate(routes("profile", data.id));
+    }
+  }
 
   React.useEffect(() => {
     onWindowScroll();
@@ -23,7 +41,8 @@ function App() {
     // set the getUMKM parameter to "0" to action as guest
     // set the getUMKM parameter to "1" or another umkm id to action as authed UMKM
     // see the data on /src/utils/dummy-data.js
-    const { error, data } = getUMKM("1");
+    // const { error, data } = getUMKM("0");
+    const { error, data } = getAuthUMKM();
     if (!error) {
       setAuthedUser(data);
       setPages(getAuthPages());
@@ -46,7 +65,10 @@ function App() {
           <NavbarLink label="UMKM" href={routes("umkm")} />
 
           {authedUser != null
-          ? <NavbarLink label={authedUser.name} href={routes("profile", authedUser.id)} />
+          ? <>
+              <NavbarLink label={authedUser.name} href={routes("profile", authedUser.id)} />
+              <NavbarLink label={<span onClick={onLogout}>Logout</span>} />
+            </>
           : <>
               <NavbarLink label="Login" href={routes("login")} />
               <NavbarLink label="Register" href={routes("register")} />
@@ -61,7 +83,7 @@ function App() {
           {pages.map((page, index) => (
             <Route 
               path={page.path} 
-              element={page.el({ authedUser })} 
+              element={page.el({ authedUser, onLoginSuccess })} 
               key={index} 
             />
           ))}

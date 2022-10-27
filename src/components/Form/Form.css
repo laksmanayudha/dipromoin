@@ -34,8 +34,12 @@
     flex: 3;
 }
 
-.form-input__input {
+.form-input__container {
+    width: 100%;
     flex: 12;
+}
+
+.form-input__input {
     width: 100%;
     background-color: transparent;
     color: var(--white);
@@ -49,6 +53,10 @@
 .form-input__input:focus{
     background-color: var(--white);
     color: var(--black-1);
+}
+
+.form-input__error {
+    color: var(--red);
 }
 
 .form-submit {

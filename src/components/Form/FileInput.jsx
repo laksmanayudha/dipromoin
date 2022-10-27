@@ -9,7 +9,8 @@ function FileInput({
         label, 
         name, 
         id,
-        horizontal 
+        horizontal,
+        errorMessage 
     }){
     
     const changeFile = (event) => {
@@ -22,19 +23,22 @@ function FileInput({
     return (
         <div className={"form-input " + (horizontal ? "form-input--horizontal" : "")}>
             {label && <label className="form-input__label" htmlFor={id}>{label}</label>}
-            <div className="form-input__input file">
-                <label htmlFor={id} className={value ? "file--height" : ""}>
-                    {value
-                     ? <Image url={value} />
-                     : "Pilih Foto"
-                    }
-                </label>
-                <input 
-                    className=""
-                    accept="image/*" 
-                    type="file" id={id} name={name}
-                    onChange={ changeFile } 
-                />
+            <div className="form-input__container">
+                <div className="form-input__input file">
+                    <label htmlFor={id} className={value ? "file--height" : ""}>
+                        {value
+                        ? <Image url={value} />
+                        : "Pilih Foto"
+                        }
+                    </label>
+                    <input 
+                        className=""
+                        accept="image/*" 
+                        type="file" id={id} name={name}
+                        onChange={ changeFile } 
+                    />
+                </div>
+                <small className="form-input__error">{errorMessage}</small>
             </div>
         </div>
     );

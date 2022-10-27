@@ -7,7 +7,8 @@ function TextArea({
         placeholder, 
         value, 
         onInputHandler, 
-        isReset 
+        isReset,
+        errorMessage
     }) {
 
     const textArea = React.useRef();
@@ -29,17 +30,20 @@ function TextArea({
     return (
         <div className={"textarea form-input " + (horizontal ? "form-input--horizontal" : "")}>
             {label && <label className="form-input__label" htmlFor="name">{label}</label>}
-            <div 
-                ref={textArea}
-                className="text-area-input form-input__input" 
-                contentEditable 
-                data-placeholder={placeholder} 
-                suppressContentEditableWarning
-                onInput={(event) => { 
-                        onInputHandler(event.target.innerHTML) 
+            <div className="form-input__container">
+                <div 
+                    ref={textArea}
+                    className="text-area-input form-input__input" 
+                    contentEditable 
+                    data-placeholder={placeholder} 
+                    suppressContentEditableWarning
+                    onInput={(event) => { 
+                            onInputHandler(event.target.innerHTML) 
+                        }
                     }
-                }
-            />
+                />
+                <small className="form-input__error">{errorMessage}</small>
+            </div>
         </div>
     );
 }

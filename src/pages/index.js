@@ -12,7 +12,7 @@ const guestPages = [
     {
         name: "login",
         path: "/login",
-        el: () => (<LoginPage />)
+        el: (props) => (<LoginPage {...props} />)
     },
     {
         name: "register",
@@ -50,7 +50,7 @@ const authPages = [
     {
         name: "promoDetail",
         path: "/promo/:param",
-        el: (props) => (<DetailPage {...props} />)
+        el: () => (<DetailPage />)
     },
     {
         name: "notfound",

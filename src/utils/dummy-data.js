@@ -1,3 +1,5 @@
+const ACCESS_TOKEN = 'accessToken';
+
 const dummyCities = [
     {
         id: "1",
@@ -231,6 +233,10 @@ const dummyUMKMProfile = [
     },
 ]
 
+const filterByProperty = (data, prop, value) => {
+    return data.filter(item => item[prop].toLowerCase().includes(value.toLowerCase()));
+}
+
 const getUMKM = (id) => {
     const umkm = dummyUMKMProfile.find(umkm => umkm.id === id);
     if (!umkm) {
@@ -256,13 +262,9 @@ const getPromo = (id) => {
     return { error: false, data: promo };
 }
 
-const filterByProperty = (data, prop, value) => {
-    return data.filter(item => item[prop].toLowerCase().includes(value.toLowerCase()));
-}
-
 const getPromos = (currentPage = 1, keyword = "", city = "0") => {
     let promos = filterByProperty(dummyPromos, "title", keyword);
-    if (city != "0") promos = filterByProperty(promos, "city", city);
+    if (city !== "0") promos = filterByProperty(promos, "city", city);
     promos = paginate(promos, currentPage);
     if (!promos) {
         return { error: true, data: null }
@@ -308,6 +310,44 @@ const getCities = () => {
     return dummyCities;
 }
 
+const putToLocalStorage = (key, value) => {
+    if (localStorage) {
+        localStorage.setItem(key, value);
+    }else {
+        console.log("Local Storage Not Available");
+    }
+}
+
+const getFromLocalStorage = (key) => {
+    if (localStorage){
+        return localStorage.getItem(key);
+    }else {
+        console.log("Local Storage Not Available");
+        return null;
+    }
+}
+
+const putAccessToken = (token) => {
+    putToLocalStorage(ACCESS_TOKEN, token)
+}
+
+const login = (email, password) => {
+    let umkm = dummyUMKMProfile.find(profile => profile.email === email && profile.password === password);
+    if (!umkm) {
+        return { error: true, message: "Invalid Email or Password", data: null };
+    }
+    return { error: false, message: "Login Success", data: { token: umkm.id } }
+}
+
+const getAuthUMKM = () => {
+    const accessToken = getFromLocalStorage(ACCESS_TOKEN);
+    const { error, data } = getUMKM(accessToken);
+    if (!error) {
+        return { error: false, data: data }
+    }
+    return { error: true, data: null };
+}
+
 export { 
     getUMKM,
     getPromo,
@@ -316,5 +356,9 @@ export {
     getCity,
     getTime,
     getCities,
-    getUMKMPromos 
+    getUMKMPromos,
+    login,
+    getAuthUMKM,
+    putAccessToken,
+    putToLocalStorage
 };

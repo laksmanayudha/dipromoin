@@ -9,34 +9,32 @@ import { getPromo } from "../../utils/dummy-data";
 import { PromoDetail, PromoWrapper } from "../../components/PromoDetail";
 import "./ProfilePage.css";
 
-function PromoListsSection({ authedUser, promos, openPopUp, PopUp, isOpen }) {
+function PromoListsSection({ authedUser, promos, openPopUp, PopUp, isOpen, currentProfile }) {
 
     const [currentPromoId, setCurrentPromoId] = React.useState(null);
     const [currentPromo, setCurrentPromo] = React.useState(null);
     const [popUpStatus, setPopUpStatus] = React.useState("add"); // add, edit, detail
-    const [actionClick, setActionClick] = React.useState(false);
 
     const onAddClick = () => {
         setPopUpStatus("add");
         setCurrentPromoId(null);
-        setActionClick(true);
+        openPopUp();
     }
 
     const onEditClick = (id) => {
         setPopUpStatus("edit");
         setCurrentPromoId(id);
-        setActionClick(true);
+        openPopUp();
     }
 
     const onDetailClick = (id) => {
         setPopUpStatus("detail");
         setCurrentPromoId(id);
-        setActionClick(true);
+        openPopUp();
     }
 
     React.useEffect(() => {
         if (!isOpen) {
-            setActionClick(false);
             setCurrentPromoId(null);
         }
     }, [isOpen]);
@@ -50,41 +48,42 @@ function PromoListsSection({ authedUser, promos, openPopUp, PopUp, isOpen }) {
         }
     }, [currentPromoId]);
 
-    React.useEffect(() => {
-        if (actionClick) {
-            openPopUp();
-        }
-    }, [actionClick]);
-
     return (
         <>
             <div className="promo-tab">
-                {authedUser != null && (
-                    <button className="promo-add" onClick={onAddClick} >
-                        <h4>+ Add Promo</h4>
-                    </button>
-                )}
+                {authedUser != null && 
+                <>
+                    {authedUser.id === currentProfile && (
+                        <button className="promo-add" onClick={onAddClick} >
+                            <h4>+ Add Promo</h4>
+                        </button>
+                    )}
+                </>}
                 <CardLists>
                     {promos.length === 0 && <h4 style={{ color: "var(--grey-1)" }}>Belum Ada Promo</h4>}
                     {promos && promos.map((promo, index) => (
                         <div className="promo-item" key={index} onClick={() => { onDetailClick(promo.id) }}>
                             <Image url={promo.image} />
-                            {authedUser != null && (
-                                <div className="promo-item__actions">
-                                    <ActionButton 
-                                        secondary 
-                                        small
-                                        action={() => { onEditClick(promo.id) }}
-                                    >
-                                        <FiEdit3 />
-                                    </ActionButton>
-                                    <ActionButton 
-                                        small
-                                    >
-                                        <FiTrash />
-                                    </ActionButton>
-                                </div>
-                            )}
+                            {authedUser != null && 
+                            <>
+                                {authedUser.id === currentProfile && (
+                                    <div className="promo-item__actions">
+                                        <ActionButton 
+                                            secondary 
+                                            small
+                                            action={() => { onEditClick(promo.id) }}
+                                        >
+                                            <FiEdit3 />
+                                        </ActionButton>
+                                        <ActionButton 
+                                            small
+                                        >
+                                            <FiTrash />
+                                        </ActionButton>
+                                    </div>
+                                )}
+                            </>}
+
                         </div>
                     ))}
                 </CardLists>
@@ -103,7 +102,7 @@ function PromoListsSection({ authedUser, promos, openPopUp, PopUp, isOpen }) {
                 />
             )}
 
-            {popUpStatus === "detail" && PopUp(
+            {(popUpStatus === "detail" && currentPromo) && PopUp(
                 <PromoWrapper>
                     <PromoDetail {...currentPromo} />
                 </PromoWrapper>

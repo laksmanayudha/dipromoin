@@ -12,22 +12,27 @@ function Input({
         id,
         min,
         disabled,
+        errorMessage,
         horizontal 
     }){
 
     return (
         <div className={"form-input " + (horizontal ? "form-input--horizontal" : "")}>
             {label && <label className="form-input__label" htmlFor={id}>{label}</label>}
-            <input 
-                className="form-input__input" 
-                type={type} id={id} name={name}
-                onChange={(event) => { onChangeHandler(event.target.value) }} 
-                value={value} 
-                min={min}
-                placeholder={placeholder}
-                disabled={disabled ? true : false}
-            />
+            <div className="form-input__container">
+                <input 
+                    className="form-input__input" 
+                    type={type} id={id} name={name}
+                    onChange={(event) => { onChangeHandler(event.target.value) }} 
+                    value={value} 
+                    min={min}
+                    placeholder={placeholder}
+                    disabled={disabled ? true : false}
+                />
+                <small className="form-input__error">{errorMessage}</small>
+            </div>
         </div>
+        
     );
 }
 

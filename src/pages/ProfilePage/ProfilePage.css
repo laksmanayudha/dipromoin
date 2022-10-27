@@ -126,8 +126,16 @@
     flex: 6;
 }
 
-.promo-form-date div:nth-child(1) .form-input .form-input__input{
-    flex: 8;
+.promo-form-date div:nth-child(1) .form-input .form-input__container{
+    flex: 8.5;
+}
+
+.promo-form-date div:nth-child(2) .form-input .form-input__label{
+    flex: none;
+}
+
+.promo-form-date div:nth-child(2) .form-input .form-input__container{
+    flex: 1;
 }
 
 @media (max-width: 797.98px) {
@@ -152,6 +160,10 @@
     }
     
     .profile-body__contacts {
+        flex-direction: column;
+    }
+
+    .promo-form-date {
         flex-direction: column;
     }
 }

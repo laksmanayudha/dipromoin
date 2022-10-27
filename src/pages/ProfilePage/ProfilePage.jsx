@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { GoToButton } from "../../components/Button";
 import { Tab, TabNavs, TabNavItem, TabDisplay, TabDisplayItem } from "../../components/Tab";
 import { getCity, getUMKM, getUMKMPromos } from "../../utils/dummy-data";
-import { dummyPromos } from "../../utils/dummy-data";
 import withPopUp from "../../hocs/withPopUp";
 import EditProfileSection from "./EditProfileSection";
 import PromoListsSection from "./PromoListsSection";
@@ -60,7 +59,7 @@ function ProfilePage({ authedUser, PopUp, openPopUp, isOpen }){
                 <Tab>
                     <TabNavs defaultTab="mypromo">
                         <TabNavItem name="mypromo">My Promo</TabNavItem>
-                        {authedUser != null && <TabNavItem name="editprofile">Edit Profile</TabNavItem>}
+                        {authedUser != null && <>{authedUser.id === param && <TabNavItem name="editprofile">Edit Profile</TabNavItem>}</>}
                     </TabNavs>
 
                     <TabDisplay>
@@ -71,6 +70,7 @@ function ProfilePage({ authedUser, PopUp, openPopUp, isOpen }){
                                 PopUp={PopUp} 
                                 isOpen={isOpen}
                                 authedUser={authedUser}
+                                currentProfile={param}
                             />
                         </TabDisplayItem>
                         <TabDisplayItem forName="editprofile">

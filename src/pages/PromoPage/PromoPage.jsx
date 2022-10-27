@@ -1,5 +1,5 @@
 import React from "react";
-import { getPromos, getCity, getTime, getUMKM, getCities } from "../../utils/dummy-data";
+import { getPromos, getCity, getTime, getCities } from "../../utils/dummy-data";
 import { Card, CardLists } from "../../components/CardLists";
 import { FilterContainer } from "../../components/Filter";
 import { PageNav, Pagination } from "../../components/Pagination";
@@ -30,7 +30,7 @@ function PromoPage({ PopUp, openPopUp, closePopUp }) {
     // const [date, setDate] = useInput("");
 
     // filter time
-    const time = ["Waktu", "Minggu ini", "Bulan ini"].map((t, index) => ({ key: `${index}`, value: t }));
+    // const time = ["Waktu", "Minggu ini", "Bulan ini"].map((t, index) => ({ key: `${index}`, value: t }));
     let cities = getCities().map(city => ({ key: city.id, value: city.name }));
     cities = [{key: "0", value: "Pilih Kota"}, ...cities];
 
@@ -45,6 +45,7 @@ function PromoPage({ PopUp, openPopUp, closePopUp }) {
 
     const submitHandler = () => {
         setFiltering(true);
+        setCurrentPromo(null);
     }
 
     React.useEffect(() => {

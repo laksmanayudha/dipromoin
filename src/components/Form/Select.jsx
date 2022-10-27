@@ -12,7 +12,14 @@ const findIndex = (values, key) => {
     return index;
 }
 
-function Select({ defaultKeyValue, values, label, horizontal, onChangeHandler }) {
+function Select({ 
+        defaultKeyValue, 
+        values, 
+        label, 
+        horizontal, 
+        onChangeHandler,
+        errorMessage 
+    }) {
 
     const dropdown = React.useRef(null);
     const displayInput = React.useRef(null);
@@ -52,22 +59,25 @@ function Select({ defaultKeyValue, values, label, horizontal, onChangeHandler })
     return (
         <div className={"form-input " + (horizontal ? "form-input--horizontal" : "")}>
             {label && <label htmlFor="" className="form-input__label">{label}</label>}
-            <div className="select form-input__input">
-                <div className="select-display" onClick={handleToggle} ref={displayInput}>
-                    <span>{values && values[indexValue].value }</span>
-                    <FiChevronDown />
+            <div className="form-input__container">
+                <div className="select form-input__input">
+                    <div className="select-display" onClick={handleToggle} ref={displayInput}>
+                        <span>{values && values[indexValue].value }</span>
+                        <FiChevronDown />
+                    </div>
+                    <ul className="select-options" ref={dropdown}>
+                        {values && values.map((value, index) => (
+                            <li 
+                                className="select-options__item" 
+                                key={index}
+                                onClick={() => { handleValueChange(value.key) }}
+                            >
+                                { value.value }
+                            </li>
+                        ))}
+                    </ul>
                 </div>
-                <ul className="select-options" ref={dropdown}>
-                    {values && values.map((value, index) => (
-                        <li 
-                            className="select-options__item" 
-                            key={index}
-                            onClick={() => { handleValueChange(value.key) }}
-                        >
-                            { value.value }
-                        </li>
-                    ))}
-                </ul>
+                <small className="form-input__error">{errorMessage}</small>
             </div>
         </div>
     );

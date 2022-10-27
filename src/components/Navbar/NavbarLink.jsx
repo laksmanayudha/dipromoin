@@ -17,8 +17,8 @@ function NavbarLink({ label, href }) {
 }
 
 NavbarLink.propTypes = {
-    label: PropTypes.string.isRequired,
-    href: PropTypes.string.isRequired
+    label: PropTypes.any,
+    href: PropTypes.string
 };
 
 export default NavbarLink;

@@ -9,7 +9,7 @@ import { getPromo } from "../../utils/dummy-data";
 import { PromoDetail, PromoWrapper } from "../../components/PromoDetail";
 import "./ProfilePage.css";
 
-function PromoListsSection({ promos, openPopUp, PopUp, onClosePopUp, authedUser }) {
+function PromoListsSection({ authedUser, promos, openPopUp, PopUp, isOpen }) {
 
     const [currentPromoId, setCurrentPromoId] = React.useState(null);
     const [currentPromo, setCurrentPromo] = React.useState(null);
@@ -18,6 +18,7 @@ function PromoListsSection({ promos, openPopUp, PopUp, onClosePopUp, authedUser 
 
     const onAddClick = () => {
         setPopUpStatus("add");
+        setCurrentPromoId(null);
         setActionClick(true);
     }
 
@@ -34,10 +35,11 @@ function PromoListsSection({ promos, openPopUp, PopUp, onClosePopUp, authedUser 
     }
 
     React.useEffect(() => {
-        onClosePopUp(() => {
+        if (!isOpen) {
             setActionClick(false);
-        });
-    }, []);
+            setCurrentPromoId(null);
+        }
+    }, [isOpen]);
 
     React.useEffect(() => {
         if (currentPromoId != null) {
@@ -87,23 +89,21 @@ function PromoListsSection({ promos, openPopUp, PopUp, onClosePopUp, authedUser 
                     ))}
                 </CardLists>
             </div>
-            {(popUpStatus === "add" && currentPromoId == null) && PopUp(
+            {popUpStatus === "add" && PopUp(
                 <PromoFormSection 
-                    id={null} 
-                    setCurrentPromoId={setCurrentPromoId} 
-                    onClosePopUp={onClosePopUp} 
+                    id={null}
+                    isOpen={isOpen}  
                 />
             )}
 
-            {(popUpStatus === "edit" && currentPromoId != null) && PopUp(
+            {popUpStatus === "edit" && PopUp(
                 <PromoFormSection 
-                    id={currentPromoId} 
-                    setCurrentPromoId={setCurrentPromoId} 
-                    onClosePopUp={onClosePopUp}
+                    id={currentPromoId}
+                    isOpen={isOpen}  
                 />
             )}
 
-            {(popUpStatus === "detail" && currentPromo != null) && PopUp(
+            {popUpStatus === "detail" && PopUp(
                 <PromoWrapper>
                     <PromoDetail {...currentPromo} />
                 </PromoWrapper>
@@ -116,7 +116,7 @@ PromoListsSection.propTypes = {
     promos: PropTypes.arrayOf(PropTypes.object).isRequired, 
     openPopUp: PropTypes.func, 
     PopUp: PropTypes.func, 
-    onClosePopUp: PropTypes.func
+    isOpen: PropTypes.bool
 }
 
 export default PromoListsSection;

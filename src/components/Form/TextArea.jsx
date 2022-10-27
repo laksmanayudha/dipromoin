@@ -1,30 +1,45 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function TextArea({ label, horizontal, placeholder, value, onInputHandler }) {
+function TextArea({ 
+        label, 
+        horizontal, 
+        placeholder, 
+        value, 
+        onInputHandler, 
+        isReset 
+    }) {
 
-    const [input, setInput] = React.useState(value);
+    const textArea = React.useRef();
 
     React.useEffect(() => {
-        if (!input) {
-            setInput(value);
+        if (!textArea.current.innerHTML) {
+            textArea.current.innerHTML = value;
         }
-    }, [value]);
+    }, [value])
+
+    React.useEffect(() => {
+        if (isReset) {
+            textArea.current.innerHTML = "";
+        }else {
+            textArea.current.innerHTML = value;
+        }
+    }, [isReset])
 
     return (
         <div className={"textarea form-input " + (horizontal ? "form-input--horizontal" : "")}>
             {label && <label className="form-input__label" htmlFor="name">{label}</label>}
             <div 
+                ref={textArea}
                 className="text-area-input form-input__input" 
                 contentEditable 
                 data-placeholder={placeholder} 
                 suppressContentEditableWarning
                 onInput={(event) => { 
-                    onInputHandler(event.target.innerHTML) }
+                        onInputHandler(event.target.innerHTML) 
+                    }
                 }
-            >
-                {input}
-            </div>
+            />
         </div>
     );
 }

@@ -8,7 +8,7 @@ import { getPromo } from "../../utils/dummy-data";
 import { getCities } from "../../utils/dummy-data";
 import "./ProfilePage.css";
 
-function PromoForm({ id, setCurrentPromoId, onClosePopUp }) {
+function PromoForm({ id, isOpen }) {
 
     const [today, setToday] = React.useState(getToday());
     const [title, setTitle] = useInput(""); 
@@ -17,8 +17,7 @@ function PromoForm({ id, setCurrentPromoId, onClosePopUp }) {
     const [address, setAddress] = useInput(""); 
     const [link, setLink] = useInput(""); 
     const [phone, setPhone] = useInput(""); 
-    const [description, setDescription] = useInput(""); 
-    // const [defaultDesc, setDefaultDesc] = useInput(""); 
+    const [description, setDescription] = useInput("");  
     const [city, setCity] = useInput("0"); 
     const [photo, setPhoto] = useInput("");
 
@@ -34,20 +33,11 @@ function PromoForm({ id, setCurrentPromoId, onClosePopUp }) {
         setLink("");
         setPhone("");
         setDescription("");
-        // setDefaultDesc("");
         setCity("0");
         setPhoto("");
     }
-
-    React.useEffect(() => {
-        onClosePopUp(() => {
-            setCurrentPromoId(null);
-            resetInput();
-        });
-    }, []);
     
     React.useEffect(() => {
-
         if (id != null) {
             const { error, data } = getPromo(id);
             if(!error) {
@@ -58,12 +48,13 @@ function PromoForm({ id, setCurrentPromoId, onClosePopUp }) {
                 setLink(data.link);
                 setPhone(data.phone);
                 setDescription(data.description);
-                // setDefaultDesc(data.description);
                 setCity(data.city);
                 setPhoto(data.image);
             }
+        }else {
+            resetInput();
         }
-    }, [id]);
+    }, [isOpen]);
 
     return (
         <PromoWrapper>
@@ -142,6 +133,7 @@ function PromoForm({ id, setCurrentPromoId, onClosePopUp }) {
                         horizontal
                         label="Description"
                         placeholder="Deskripsi..."
+                        isReset={!isOpen}
                         value={description}
                         onInputHandler={setDescription}
                     />

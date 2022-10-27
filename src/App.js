@@ -23,7 +23,7 @@ function App() {
     // set the getUMKM parameter to "0" to action as guest
     // set the getUMKM parameter to "1" or another umkm id to action as authed UMKM
     // see the data on /src/utils/dummy-data.js
-    const { error, data } = getUMKM("0");
+    const { error, data } = getUMKM("1");
     if (!error) {
       setAuthedUser(data);
       setPages(getAuthPages());

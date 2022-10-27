@@ -31,7 +31,11 @@ function Carousel({ items, onClick }) {
         return () => {
             clearInterval(intervalId);
         }
-    }, [selectedIndex])
+
+        // put prop items as dependency, 
+        // if not, the function will not update the first items props value (still hold the old value) which is empty array
+        // and it's make the the selected index still zero
+    }, [selectedIndex, items]); 
 
     if(items.length === 0) {
         return null;

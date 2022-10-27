@@ -33,6 +33,7 @@ function withPopUp(Component) {
                     openPopUp={openPopUp}
                     closePopUp={closePopUp}
                     onClosePopUp={onClosePopUp}
+                    isOpen={isOpen}
                 />
             </>
         )

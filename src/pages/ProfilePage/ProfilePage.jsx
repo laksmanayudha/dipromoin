@@ -11,7 +11,7 @@ import PromoListsSection from "./PromoListsSection";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import "./ProfilePage.css";
 
-function ProfilePage({ authedUser, PopUp, openPopUp, onClosePopUp }){
+function ProfilePage({ authedUser, PopUp, openPopUp, isOpen }){
 
     const { param } = useParams();
     const [profile, setProfile] = React.useState(null);
@@ -69,7 +69,7 @@ function ProfilePage({ authedUser, PopUp, openPopUp, onClosePopUp }){
                                 promos={promos} 
                                 openPopUp={openPopUp} 
                                 PopUp={PopUp} 
-                                onClosePopUp={onClosePopUp}
+                                isOpen={isOpen}
                                 authedUser={authedUser}
                             />
                         </TabDisplayItem>

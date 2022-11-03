@@ -62,7 +62,7 @@ function PromoListsSection({ authedUser, promos, openPopUp, PopUp, isOpen, curre
                 <CardLists>
                     {promos.length === 0 && <h4 style={{ color: "var(--grey-1)" }}>Belum Ada Promo</h4>}
                     {promos && promos.map((promo, index) => (
-                        <div className="promo-item" key={index} onClick={!authedUser ? () => { onDetailClick(promo.id) } : () => {}}>
+                        <div className="promo-item" key={index} onClick={!authedUser || authedUser.id !== currentProfile ? () => { onDetailClick(promo.id) } : () => {}}>
                             <Image url={promo.image} />
                             {authedUser != null && 
                             <>

@@ -27,7 +27,7 @@
     flex-wrap: wrap;
 }
 
-.about-age-images__item {
+.about-page-images__item {
     flex-basis: 200px;
     flex-grow: 1;
     height: 20em;

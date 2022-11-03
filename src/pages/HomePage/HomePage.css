@@ -5,3 +5,7 @@
     flex-direction: column;
     gap: 4em;
 }
+
+.home-page .image:hover {
+    transform: scale(1.3);
+}

@@ -4,7 +4,7 @@ import PromoFormSection from "./PromoFormSection";
 import { ActionButton } from "../../components/Button";
 import { CardLists } from "../../components/CardLists"
 import { Image } from "../../components/Image";
-import { FiTrash, FiEdit3 } from "react-icons/fi";
+import { FiTrash, FiEdit3, FiEye } from "react-icons/fi";
 import { getPromo } from "../../utils/dummy-data";
 import { PromoDetail, PromoWrapper } from "../../components/PromoDetail";
 import "./ProfilePage.css";
@@ -62,12 +62,19 @@ function PromoListsSection({ authedUser, promos, openPopUp, PopUp, isOpen, curre
                 <CardLists>
                     {promos.length === 0 && <h4 style={{ color: "var(--grey-1)" }}>Belum Ada Promo</h4>}
                     {promos && promos.map((promo, index) => (
-                        <div className="promo-item" key={index} onClick={() => { onDetailClick(promo.id) }}>
+                        <div className="promo-item" key={index} onClick={!authedUser ? () => { onDetailClick(promo.id) } : () => {}}>
                             <Image url={promo.image} />
                             {authedUser != null && 
                             <>
                                 {authedUser.id === currentProfile && (
                                     <div className="promo-item__actions">
+                                        <ActionButton 
+                                            secondary 
+                                            small
+                                            action={() => { onDetailClick(promo.id) }}
+                                        >
+                                            <FiEye />
+                                        </ActionButton>
                                         <ActionButton 
                                             secondary 
                                             small

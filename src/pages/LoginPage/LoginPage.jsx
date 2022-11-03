@@ -11,7 +11,7 @@ function LoginPage({ onLoginSuccess }) {
     const [error, setError] = useInput("");
 
     const submitHandler = () => {
-        const { error, message, data } = login(email, password);
+        const { error, message, data } = login({email, password});
         if (!error) {
             onLoginSuccess(data.token);
         }else{

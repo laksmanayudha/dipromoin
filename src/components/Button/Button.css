@@ -1,8 +1,11 @@
 @import url("../../App.css");
 
 .action-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: none;
-    padding: 1em 7em;
+    padding: 1em 7%;
     border-radius: 8px;
     color: var(--white);
     cursor: pointer;
@@ -26,7 +29,7 @@
 }
 
 .action-button--small {
-    padding: .5em 1em;
+    padding: .5em 4%;
 }
 
 /* button */

@@ -1,6 +1,8 @@
 const ACCESS_TOKEN = 'accessToken';
+const UMKM_PROFILE = 'umkmProfile';
+const PROMOS = 'promos';
 
-const dummyCities = [
+let dummyCities = [
     {
         id: "1",
         name: "Jakarta"
@@ -31,7 +33,7 @@ const dummyCities = [
     },
 ];
 
-const dummyPromos = [
+let dummyPromos = [
     {
         id: "1",
         from: "2022-10-18",
@@ -182,7 +184,7 @@ const dummyPromos = [
     },
 ]
 
-const dummyUMKMProfile = [
+let dummyUMKMProfile = [
     {
         id: "1",
         name: "Kerajinan Pak Nur",
@@ -298,8 +300,11 @@ const getUMKMPromos = (umkmId) => {
 }
 
 const getCity = (id) => {
-    const city = dummyCities.find(city => city.id === id).name;
-    return city;
+    const city = dummyCities.find(city => city.id === id);
+    if (!city) {
+        return "";
+    }
+    return city.name;
 }
 
 const getTime = (date) => {
@@ -331,12 +336,97 @@ const putAccessToken = (token) => {
     putToLocalStorage(ACCESS_TOKEN, token)
 }
 
-const login = (email, password) => {
+const login = ({email, password}) => {
     let umkm = dummyUMKMProfile.find(profile => profile.email === email && profile.password === password);
     if (!umkm) {
         return { error: true, message: "Invalid Email or Password", data: null };
     }
     return { error: false, message: "Login Success", data: { token: umkm.id } }
+}
+
+const validateIsEmpty = (value, field, customMessage) => {
+    if (!value) {
+        throw { type: field, message: customMessage }
+    }
+    return;
+}
+
+const validateIsSame = (valueOne, valueTwo, field, customMessage) => {
+    if (valueOne !== valueTwo) {
+        throw { type: field, message: customMessage }
+    }
+    return;
+}
+
+const validateIsEmailAvailable = (email) => {
+    const umkm = dummyUMKMProfile.find(profile => profile.email === email);
+    if (umkm) {
+        throw { type: "email", message: "Email Already Taken" }
+    }
+    return;
+}
+
+const generateId = () => +new Date() + "";
+
+const register = ({name, email, password, passwordConfirmation}) => {
+
+    try{
+        validateIsEmpty(name, "name", "Name is Required");
+        validateIsEmpty(email, "email", "Email is Requierd");
+        validateIsEmailAvailable(email);
+        validateIsEmpty(password, "password", "Password is Required");
+        validateIsEmpty(passwordConfirmation, "passwordConfirmation", "Confirm Your Password");
+        validateIsSame(password, passwordConfirmation, "passwordConfirmation", "Mismatch Password and Password Confirmation");
+    }catch(e) {
+        return { error: true, message: "Invalid Input", data: e }
+    }
+
+    insertUMKM({
+        id: generateId(),
+        name,
+        email,
+        password,
+        profileImage: "/images/default-profile.png",
+        description: "",
+        phone: "",
+        link: "",
+        city: "",
+        address: "",
+    });
+
+    return { error: false, message: "Success Create an Account", data: null }
+}
+
+const insertUMKM = ({
+        id,
+        name,
+        email,
+        password,
+        profileImage,
+        description,
+        phone,
+        link,
+        city,
+        address
+    }) => {
+
+    dummyUMKMProfile = [
+        ...dummyUMKMProfile,
+        {
+            id,
+            name,
+            email,
+            password,
+            profileImage,
+            description,
+            phone,
+            link,
+            city,
+            address
+        } 
+    ];
+
+    saveData();
 }
 
 const getAuthUMKM = () => {
@@ -348,6 +438,23 @@ const getAuthUMKM = () => {
     return { error: true, data: null };
 }
 
+const saveData = () => {
+    putToLocalStorage(UMKM_PROFILE, JSON.stringify(dummyUMKMProfile));
+    putToLocalStorage(PROMOS, JSON.stringify(dummyPromos));
+}
+
+const updateDataFromLocalStorage = () => {
+    const umkms = getFromLocalStorage(UMKM_PROFILE);
+    if (umkms) {
+        dummyUMKMProfile = JSON.parse(umkms);
+    }
+
+    saveData();
+}
+
+// update initial data before all UI/document rendered
+updateDataFromLocalStorage();
+
 export { 
     getUMKM,
     getPromo,
@@ -358,7 +465,9 @@ export {
     getCities,
     getUMKMPromos,
     login,
+    register,
     getAuthUMKM,
     putAccessToken,
-    putToLocalStorage
+    putToLocalStorage,
+    updateDataFromLocalStorage
 };

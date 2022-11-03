@@ -32,13 +32,6 @@ function HomePage() {
         description: promo.description
     }));
 
-    const umkmCards = umkms.map(umkm => ({
-        image: umkm.profileImage,
-        title: umkm.name,
-        subtitle: `${getCity(umkm.city)} - ${umkm.address}`,
-        description: umkm.description
-    }));
-
     return (
         <div className="home-page">
             {/* carousel */}
@@ -57,6 +50,7 @@ function HomePage() {
                             subtitle={`${getCity(item.city)} | ${getUMKM(item.umkm).data.name} | ${getTime(item.to)}`}
                             image={item.image}
                             description={item.description}
+                            action={() => { navigate(routes("promoDetail", item.id)) }}
                         />
                     ))}
                 </CardLists>
@@ -69,8 +63,16 @@ function HomePage() {
             <section className="umkm-section">
                 <h2 className="section-title">Find the Nearest UMKM From Your City</h2>
                 <CardLists isVertical>
-                    {umkmCards && umkmCards.map((item, index) => (
-                        <Card {...item} key={index} leftHeader/>
+                    {umkms && umkms.map((item, index) => (
+                        <Card  
+                            key={index}
+                            title={item.name}
+                            subtitle={`${getCity(item.city)} - ${item.address} `}
+                            image={item.profileImage}
+                            description={item.description}
+                            action={() => { navigate(routes("profile", item.id)) }} 
+                            leftHeader
+                        />
                     ))}
                 </CardLists>
                 <div className="section-action">

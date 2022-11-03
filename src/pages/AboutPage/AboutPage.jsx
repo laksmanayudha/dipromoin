@@ -16,13 +16,13 @@ function AboutPage() {
                 Dipromoin.id memudahkan pengguna mencari promo di sekitar wilayah terdekat mereka secara terpusat melalui sebuat platform yang mengumpulkan berbagai informasi promo UMKM masyarakat. <a className="documentation" href="https://docs.google.com/document/d/1MNiUCeZyY08H_ZxnbYu2pLVYEry0oXTWv075ABm5wsk/edit#heading=h.akagg73xso0n" target="_blank" rel="noreferrer">Lihat dokumentasi</a>.
             </p>
             <div className="about-page-images">
-                <div className="about-age-images__item">
+                <div className="about-page-images__item">
                     <Image url="./images/profile-1.png" />
                 </div>
-                <div className="about-age-images__item">
+                <div className="about-page-images__item">
                     <Image url="./images/profile-2.png" />
                 </div>
-                <div className="about-age-images__item">
+                <div className="about-page-images__item">
                     <Image url="./images/profile-1.png" />
                 </div>
             </div>

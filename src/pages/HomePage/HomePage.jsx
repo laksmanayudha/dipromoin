@@ -50,6 +50,7 @@ function HomePage() {
                             subtitle={`${getCity(item.city)} | ${getUMKM(item.umkm).data.name} | ${getTime(item.to)}`}
                             image={item.image}
                             description={item.description}
+                            to={routes("promoDetail", item.id)}
                             action={() => { navigate(routes("promoDetail", item.id)) }}
                         />
                     ))}
@@ -70,6 +71,7 @@ function HomePage() {
                             subtitle={`${getCity(item.city)} - ${item.address} `}
                             image={item.profileImage}
                             description={item.description}
+                            to={routes("profile", item.id)}
                             action={() => { navigate(routes("profile", item.id)) }} 
                             leftHeader
                         />

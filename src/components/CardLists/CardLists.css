@@ -43,6 +43,10 @@
     padding: 1.5em 2em;
 }
 
+.card-body__title a {
+    color: var(--black-1);
+}
+
 .card-body__title {
     display: -webkit-box;
     -webkit-line-clamp: 1;

@@ -429,6 +429,40 @@ const insertUMKM = ({
     saveData();
 }
 
+const updateUMKM = ({
+        id,
+        name,
+        profileImage,
+        description,
+        phone,
+        link,
+        city,
+        address
+    }) => {
+
+    try{
+        validateIsEmpty(name, "name", "Name is Required");
+    }catch(e) {
+        return { error: true, message: "Invalid Input", data: e }
+    }
+
+    // udpate profile
+    dummyUMKMProfile = dummyUMKMProfile.map(profile => (profile.id === id ? {
+            ...profile,
+            name,
+            profileImage,
+            description,
+            phone,
+            link,
+            city,
+            address
+        } :  profile));
+    
+    saveData();
+    return { error: false, message: "Success update profile", data: null };
+
+}
+
 const getAuthUMKM = () => {
     const accessToken = getFromLocalStorage(ACCESS_TOKEN);
     const { error, data } = getUMKM(accessToken);
@@ -456,6 +490,7 @@ const updateDataFromLocalStorage = () => {
 updateDataFromLocalStorage();
 
 export { 
+    dummyUMKMProfile,
     getUMKM,
     getPromo,
     getPromos,
@@ -469,5 +504,6 @@ export {
     getAuthUMKM,
     putAccessToken,
     putToLocalStorage,
-    updateDataFromLocalStorage
+    updateDataFromLocalStorage,
+    updateUMKM
 };

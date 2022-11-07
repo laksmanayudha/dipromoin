@@ -80,6 +80,7 @@ function UMKMPage() {
                         title={item.name}
                         subtitle={`${getCity(item.city)} | ${item.address}`}
                         description={item.description}
+                        to={routes("profile", item.id)}
                         leftHeader={true} 
                         key={index} 
                     />

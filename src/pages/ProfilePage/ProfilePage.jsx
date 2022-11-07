@@ -8,6 +8,7 @@ import withPopUp from "../../hocs/withPopUp";
 import EditProfileSection from "./EditProfileSection";
 import PromoListsSection from "./PromoListsSection";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
+import parser from "html-react-parser";
 import "./ProfilePage.css";
 
 function ProfilePage({ authedUser, PopUp, openPopUp, isOpen }){
@@ -28,7 +29,7 @@ function ProfilePage({ authedUser, PopUp, openPopUp, isOpen }){
         if (!dataPromos.error) {
             setPromos(dataPromos.data);
         }
-    }, [param]);
+    }, [param, authedUser]);
 
     if (!profile) {
         return <NotFoundPage />
@@ -46,7 +47,7 @@ function ProfilePage({ authedUser, PopUp, openPopUp, isOpen }){
                         <small className="profile-body__city">{getCity(profile.city)}</small>
                         <small className="profile-body__address">{profile.address}</small>
                         <div className="profile-body__description">
-                            {profile.description}
+                            {parser(profile.description)}
                         </div>
                     </div>
                     <div className="profile-body__contacts">
@@ -74,7 +75,7 @@ function ProfilePage({ authedUser, PopUp, openPopUp, isOpen }){
                             />
                         </TabDisplayItem>
                         <TabDisplayItem forName="editprofile">
-                            <EditProfileSection />
+                            <EditProfileSection authedUser={authedUser} />
                         </TabDisplayItem>
                     </TabDisplay>
                 </Tab>

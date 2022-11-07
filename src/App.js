@@ -5,6 +5,7 @@ import { Footer } from "./components/Footer";
 import { getAuthPages, getGuestPages, routes } from "./pages";
 import { getAuthUMKM } from "./utils/dummy-data";
 import { putAccessToken } from "./utils/dummy-data";
+import { UpdateProfileContext } from "./contexts/updateProfileContext";
 import onWindowScroll from "./utils/onWindowScroll";
 import onWindowResize from "./utils/onWindowResize";
 import onDocumentClick from "./utils/onDocumentClick";
@@ -15,6 +16,7 @@ function App() {
   const [pages, setPages] = React.useState([...getGuestPages(), ...getAuthPages()]);
   const [authedUser, setAuthedUser] = React.useState(null);
   const { pathname } = useLocation();
+  const {isProfileUpdate, setIsProfileUpdate} = React.useContext(UpdateProfileContext);
   const navigate = useNavigate();
 
   const onLogout = () => {
@@ -37,7 +39,9 @@ function App() {
     onWindowScroll();
     onWindowResize();
     onDocumentClick();
+  }, []);
 
+  React.useEffect(() => {
     // set the getUMKM parameter to "0" to action as guest
     // set the getUMKM parameter to "1" or another umkm id to action as authed UMKM
     // see the data on /src/utils/dummy-data.js
@@ -46,55 +50,55 @@ function App() {
     if (!error) {
       setAuthedUser(data);
       setPages(getAuthPages());
+      setIsProfileUpdate(false);
     }
-
-  }, []);
+  }, [isProfileUpdate]);
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
   return (
-    <div className="App">
-      {/* header */}
-      <header className="App-header">
-        <Navbar logo={"Dipromoin.id"}>
-          <NavbarLink label="Home" href={routes("home")} />
-          <NavbarLink label="About us" href={routes("about")} />
-          <NavbarLink label="Promo" href={routes("promo")} />
-          <NavbarLink label="UMKM" href={routes("umkm")} />
+      <div className="App">
+        {/* header */}
+        <header className="App-header">
+          <Navbar logo={"Dipromoin.id"}>
+            <NavbarLink label="Home" href={routes("home")} />
+            <NavbarLink label="About us" href={routes("about")} />
+            <NavbarLink label="Promo" href={routes("promo")} />
+            <NavbarLink label="UMKM" href={routes("umkm")} />
 
-          {authedUser != null
-          ? <>
-              <NavbarLink label={authedUser.name} href={routes("profile", authedUser.id)} />
-              <NavbarLink label={<span onClick={onLogout}>Logout</span>} />
-            </>
-          : <>
-              <NavbarLink label="Login" href={routes("login")} />
-              <NavbarLink label="Register" href={routes("register")} />
-            </>
-          }
-        </Navbar>
-      </header>
+            {authedUser != null
+            ? <>
+                <NavbarLink label={authedUser.name} href={routes("profile", authedUser.id)} />
+                <NavbarLink label={<span onClick={onLogout}>Logout</span>} />
+              </>
+            : <>
+                <NavbarLink label="Login" href={routes("login")} />
+                <NavbarLink label="Register" href={routes("register")} />
+              </>
+            }
+          </Navbar>
+        </header>
 
-      {/* main content */}
-      <main className="App-main">
-        <Routes>
-          {pages.map((page, index) => (
-            <Route 
-              path={page.path} 
-              element={page.el({ authedUser, onLoginSuccess })} 
-              key={index} 
-            />
-          ))}
-        </Routes>
-      </main>
+        {/* main content */}
+        <main className="App-main">
+          <Routes>
+            {pages.map((page, index) => (
+              <Route 
+                path={page.path} 
+                element={page.el({ authedUser, onLoginSuccess })} 
+                key={index} 
+              />
+            ))}
+          </Routes>
+        </main>
 
-      {/* footer */}
-      <footer className="App-footer">
-        <Footer />
-      </footer>
-    </div>
+        {/* footer */}
+        <footer className="App-footer">
+          <Footer />
+        </footer>
+      </div>
   );
 }
 

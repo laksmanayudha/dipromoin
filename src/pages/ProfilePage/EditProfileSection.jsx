@@ -1,28 +1,58 @@
 import React from "react";
 import PropTypes from "prop-types";
 import useInput from "../../hooks/useInput";
-import { getCities } from "../../utils/dummy-data";
+import { getCities, updateUMKM } from "../../utils/dummy-data";
 import { FileInput, Form, Input, Select, SubmitButton, TextArea } from "../../components/Form";
+import { UpdateProfileContext } from "../../contexts/updateProfileContext";
 import "./ProfilePage.css";
 
-function EditProfileSection() {
+function EditProfileSection({ authedUser }) {
 
-    const [name, setName] = useInput(""); 
-    const [address, setAddress] = useInput(""); 
-    const [link, setLink] = useInput(""); 
-    const [phone, setPhone] = useInput(""); 
-    const [description, setDescription] = useInput(""); 
-    const [city, setCity] = useInput("0"); 
-    const [photo, setPhoto] = useInput(""); 
+    const [name, setName] = useInput(authedUser.name); 
+    const [address, setAddress] = useInput(authedUser.address); 
+    const [link, setLink] = useInput(authedUser.link); 
+    const [phone, setPhone] = useInput(authedUser.phone); 
+    const [description, setDescription] = useInput(authedUser.description); 
+    const [city, setCity] = useInput(authedUser.city); 
+    const [profileImage, setProfileImage] = useInput(authedUser.profileImage); 
+    const [errors, setErrors] = React.useState({});
 
+    // context 
+    const {setIsProfileUpdate} = React.useContext(UpdateProfileContext);
 
     // city options
     let cities = getCities().map(city => ({ key: city.id, value: city.name }));
     cities = [{key: "0", value: "Pilih Kota"}, ...cities];
 
+    const submitHandler = () => {
+        const {error, message, data} = updateUMKM({
+            id: authedUser.id,
+            name, 
+            address, 
+            link, 
+            phone, 
+            description, 
+            city, 
+            profileImage
+        });
+
+        if (!error) {
+            setErrors({noError: true});
+            setIsProfileUpdate(true);
+            window.scrollTo(0, 0);
+        }else {
+            setErrors({[data.type]: data.message});
+        }
+    }
+
     return (
         <div className="profile-tab">
-            <Form onBackground>
+            {errors.noError && 
+                <p style={{  color: "var(--green-2)", marginBottom: "1em", fontWeight: "bold" }}>
+                    Successfuly update profile.
+                </p>
+            }
+            <Form onBackground onSubmitHandler={submitHandler}>
                 <Input
                     horizontal
                     onChangeHandler={setName}
@@ -30,13 +60,17 @@ function EditProfileSection() {
                     type="text"
                     value={name}
                     placeholder="Nama UMKM..."
+                    name="name"
+                    errorMessage={errors.name}
                 />
                 <FileInput
                     horizontal
-                    onChangeHandler={setPhoto}
+                    onChangeHandler={setProfileImage}
                     id="foto"
-                    value={photo}
+                    value={profileImage}
                     label="Foto Profile"
+                    name="profileImage"
+                    errorMessage={errors.profileImage}
                 />
                 <Select
                     horizontal
@@ -44,6 +78,8 @@ function EditProfileSection() {
                     values={cities}
                     label="Kota UMKM"
                     onChangeHandler={setCity}
+                    name="city"
+                    errorMessage={errors.city}
                 />
                 <Input
                     horizontal
@@ -52,6 +88,8 @@ function EditProfileSection() {
                     type="text"
                     value={address}
                     placeholder="Alamat UMKM..."
+                    name="address"
+                    errorMessage={errors.address}
                 />
                 <Input
                     horizontal
@@ -60,6 +98,8 @@ function EditProfileSection() {
                     type="text"
                     value={link}
                     placeholder="Alamat Webiste atau Sosial Media..."
+                    name="link"
+                    errorMessage={errors.link}
                 />
                 <Input
                     horizontal
@@ -68,6 +108,8 @@ function EditProfileSection() {
                     type="text"
                     value={phone}
                     placeholder="Nomor Telpon..."
+                    name="phone"
+                    errorMessage={errors.phone}
                 />
                 <TextArea
                     horizontal
@@ -75,6 +117,8 @@ function EditProfileSection() {
                     placeholder="Deskripsi..."
                     value={description}
                     onInputHandler={setDescription}
+                    name="description"
+                    errorMessage={errors.description}
                 />
                 <SubmitButton label="Simpan" />
             </Form>

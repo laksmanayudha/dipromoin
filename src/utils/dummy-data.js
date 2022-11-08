@@ -476,6 +476,7 @@ const insertPromo = ({
     photo
 }) => {
 
+    // validate user input
     try{
         validateIsRequired(title, "title", "Title is Required");
         validateIsRequired(photo, "photo", "Promo image is Required");
@@ -486,9 +487,11 @@ const insertPromo = ({
         validateIsRequired(address, "address", "Address is Required");
         validateIsRequired(phone, "phone", "Phone is Required");
     }catch(e) {
+        // if error, return validation error message
         return {error: true, message: "Fail to insert promo", data: e }
     }
 
+    // insert new promo
     dummyPromos = [
         {
             id: generateId(),
@@ -506,10 +509,72 @@ const insertPromo = ({
         ...dummyPromos
     ];
 
+    // save data to localStorage
     saveData();
 
+    // insert success, return with no error
     return {error: false, message: "Success to insert promo", data: null};
 
+}
+
+const updatePromo = ({
+    umkm,
+    id,
+    title,
+    from,
+    to,
+    address,
+    link,
+    phone,
+    description,
+    city,
+    photo
+}) => {
+
+    // validate user input
+    try{
+        validateIsRequired(id, "id", "Promo ID is Required");
+        validateIsRequired(title, "title", "Title is Required");
+        validateIsRequired(photo, "photo", "Promo image is Required");
+        validateIsRequired(from, "from", "Start date is Required");
+        validateIsRequired(to, "to", "End date is Required");
+        validateIsRequired(description, "description", "Description is Required");
+        validateIsRequired(city, "city", "City is Required");
+        validateIsRequired(address, "address", "Address is Required");
+        validateIsRequired(phone, "phone", "Phone is Required");
+    }catch(e) {
+        // if error, return validation message
+        return {error: true, message: "Fail to update promo", data: e }
+    }
+
+    // update data
+    dummyPromos = dummyPromos.map(promo => promo.id === id ? {
+        ...promo,
+        umkm,
+        id,
+        title,
+        from,
+        to,
+        address,
+        link,
+        phone,
+        description,
+        city,
+        image: photo
+    } : promo );
+
+    // save data to localStorage
+    saveData();
+
+    // insert success, return with no error
+    return {error: false, message: "Success to update promo", data: null};
+
+}
+
+const deletePromo = (id) => {
+    dummyPromos = dummyPromos.filter(promo => promo.id !== id);
+    saveData();
+    return {error: false, message: "Success to delete promo", data: null};
 }
 
 const getAuthUMKM = () => {
@@ -559,5 +624,7 @@ export {
     putToLocalStorage,
     updateDataFromLocalStorage,
     updateUMKM,
-    insertPromo
+    insertPromo,
+    updatePromo,
+    deletePromo
 };

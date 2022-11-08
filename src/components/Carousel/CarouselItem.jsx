@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import parser from "html-react-parser";
 import { ActionButton } from "../Button";
 import { Image } from "../Image";
 import "./Carousel.css";
@@ -15,7 +16,7 @@ function CarouselItem({ image, title, subtitle, description, onClick }) {
             <div className="carousel-item-body">
                 <h2 className="carousel-item-body__title">{ title }</h2>
                 <small className="carousel-item-body__subtitle">{ subtitle }</small>
-                <p className="carousel-item-body__description">{ description }</p>
+                <div className="carousel-item-body__description">{ parser(description) }</div>
                 <div className="carousel-item-body__action">
                     <ActionButton action={onClick}>See More</ActionButton>
                 </div>

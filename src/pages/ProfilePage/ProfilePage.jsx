@@ -23,6 +23,15 @@ function ProfilePage({ authedUser, PopUp, openPopUp, closePopUp, isOpen }){
         setFetchPromo(true);
     }
 
+    const editPromoSuccess = () => {
+        closePopUp();
+        setFetchPromo(true);
+    }
+
+    const deletePromoSuccess = () => {
+        setFetchPromo(true);
+    }
+
     React.useEffect(() => {
         // get UMKM Profile
         const dataProfile = getUMKM(param);
@@ -49,7 +58,7 @@ function ProfilePage({ authedUser, PopUp, openPopUp, closePopUp, isOpen }){
     }, [fetchPromo])
 
     if (!profile) {
-        return <NotFoundPage />
+        return <NotFoundPage message="No Profile Found" />
     }
 
     return (
@@ -86,6 +95,8 @@ function ProfilePage({ authedUser, PopUp, openPopUp, closePopUp, isOpen }){
                                 promos={promos} 
                                 openPopUp={openPopUp} 
                                 addPromoSuccess={addPromoSuccess}
+                                editPromoSuccess={editPromoSuccess}
+                                deletePromoSuccess={deletePromoSuccess}
                                 PopUp={PopUp} 
                                 isOpen={isOpen}
                                 authedUser={authedUser}

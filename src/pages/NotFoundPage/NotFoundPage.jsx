@@ -1,11 +1,11 @@
 import React from "react";
 import "./NotFoundPage.css";
 
-function NotFoundPage() {
+function NotFoundPage({ message }) {
 
     return (
         <div className="notfound-page">
-            <h1>404 | NOT FOUND</h1>
+            <h1>{message || "404 | NOT FOUND"}</h1>
         </div>
     );
 }

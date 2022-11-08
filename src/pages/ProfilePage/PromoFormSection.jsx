@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import useInput from "../../hooks/useInput";
+import getToday from "../../utils/getToday";
 import { FileInput, Form, Input, Select, SubmitButton, TextArea } from "../../components/Form";
 import { PromoWrapper } from "../../components/PromoDetail";
-import getToday from "../../utils/getToday";
-import { getPromo, insertPromo } from "../../utils/dummy-data";
+import { getPromo, insertPromo, updatePromo } from "../../utils/dummy-data";
 import { getCities } from "../../utils/dummy-data";
 import "./ProfilePage.css";
 
@@ -12,6 +12,7 @@ function PromoForm({
         id, 
         isOpen, 
         addPromoSuccess, 
+        editPromoSuccess,
         formStatus, 
         authedUser 
     }) {
@@ -67,7 +68,26 @@ function PromoForm({
                 setError({[data.type]: data.message});
             }
         }else {
+            const {error, message, data} = updatePromo({
+                umkm: authedUser.id,
+                id,
+                title,
+                from,
+                to,
+                address,
+                link,
+                phone,
+                description,
+                city,
+                photo
+            });
 
+            if (!error) {
+                setError({noError: true});
+                editPromoSuccess();
+            }else {
+                setError({[data.type]: data.message});
+            }
         }
 
         // scroll to top
@@ -130,7 +150,8 @@ function PromoForm({
                                 onChangeHandler={setFrom}
                                 label="Mulai"
                                 type="date"
-                                min={from || today}
+                                min={today}
+                                max={to}
                                 value={from}
                                 name="from"
                                 errorMessage={error.from}

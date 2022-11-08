@@ -99,6 +99,9 @@
 }
 
 @media (max-width: 575.98px) { 
+    .carousel {
+        height: 300px;
+    }
     .carousel-item-body {
         padding: 1em 2em 1.3em;
     }

@@ -5,7 +5,7 @@ import { ActionButton } from "../../components/Button";
 import { CardLists } from "../../components/CardLists"
 import { Image } from "../../components/Image";
 import { FiTrash, FiEdit3, FiEye } from "react-icons/fi";
-import { getPromo } from "../../utils/dummy-data";
+import { deletePromo, getPromo } from "../../utils/dummy-data";
 import { PromoDetail, PromoWrapper } from "../../components/PromoDetail";
 import "./ProfilePage.css";
 
@@ -16,7 +16,9 @@ function PromoListsSection({
         PopUp, 
         isOpen, 
         currentProfile,
-        addPromoSuccess 
+        addPromoSuccess,
+        editPromoSuccess,
+        deletePromoSuccess
     }) {
 
     const [currentPromoId, setCurrentPromoId] = React.useState(null);
@@ -39,6 +41,11 @@ function PromoListsSection({
         setFormStatus("detail");
         setCurrentPromoId(id);
         openPopUp();
+    }
+
+    const onDeleteClick = (id) => {
+        deletePromo(id);
+        deletePromoSuccess();
     }
 
     React.useEffect(() => {
@@ -92,6 +99,7 @@ function PromoListsSection({
                                         </ActionButton>
                                         <ActionButton 
                                             small
+                                            action={() => { onDeleteClick(promo.id) }}
                                         >
                                             <FiTrash />
                                         </ActionButton>
@@ -117,6 +125,7 @@ function PromoListsSection({
                 <PromoFormSection 
                     id={currentPromoId}
                     isOpen={isOpen}
+                    editPromoSuccess={editPromoSuccess}
                     formStatus="edit"  
                     authedUser={authedUser}  
                 />

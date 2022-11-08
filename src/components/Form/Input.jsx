@@ -11,6 +11,7 @@ function Input({
         name, 
         id,
         min,
+        max,
         disabled,
         errorMessage,
         horizontal 
@@ -26,6 +27,7 @@ function Input({
                     onChange={(event) => { onChangeHandler(event.target.value) }} 
                     value={value} 
                     min={min}
+                    max={max}
                     placeholder={placeholder}
                     disabled={disabled ? true : false}
                 />

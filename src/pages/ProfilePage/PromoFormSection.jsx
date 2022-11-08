@@ -95,28 +95,30 @@ function PromoForm({
     }
     
     React.useEffect(() => {
-        // for edit form
-        if (id != null) {
-            const { error, data } = getPromo(id);
-            if(!error) {
-                setTitle(data.title);
-                setFrom(data.from);
-                setTo(data.to);
-                setAddress(data.address);
-                setLink(data.link);
-                setPhone(data.phone);
-                setDescription(data.description);
-                setCity(data.city);
-                setPhoto(data.image);
+        if (authedUser) {
+            // for edit form
+            if (id != null) {
+                const { error, data } = getPromo(id);
+                if(!error) {
+                    setTitle(data.title);
+                    setFrom(data.from);
+                    setTo(data.to);
+                    setAddress(data.address);
+                    setLink(data.link);
+                    setPhone(data.phone);
+                    setDescription(data.description);
+                    setCity(data.city);
+                    setPhoto(data.image);
+                }
             }
-        }
-        // for add form
-        else {
-            resetInput();
-            setAddress(authedUser.address);
-            setLink(authedUser.link);
-            setPhone(authedUser.phone);
-            setCity(authedUser.city);
+            // for add form
+            else {
+                resetInput();
+                setAddress(authedUser.address);
+                setLink(authedUser.link);
+                setPhone(authedUser.phone);
+                setCity(authedUser.city);
+            }
         }
     }, [isOpen]);
 

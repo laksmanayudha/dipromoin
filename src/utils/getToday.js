@@ -1,7 +1,9 @@
 const getToday = () => {
-    let today = new Date();
-    today = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-    return today;
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+    const date = today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
+    return `${year}-${month}-${date}`;
 }
 
 export default getToday;

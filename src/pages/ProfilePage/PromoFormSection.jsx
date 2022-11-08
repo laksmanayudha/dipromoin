@@ -4,22 +4,29 @@ import useInput from "../../hooks/useInput";
 import { FileInput, Form, Input, Select, SubmitButton, TextArea } from "../../components/Form";
 import { PromoWrapper } from "../../components/PromoDetail";
 import getToday from "../../utils/getToday";
-import { getPromo } from "../../utils/dummy-data";
+import { getPromo, insertPromo } from "../../utils/dummy-data";
 import { getCities } from "../../utils/dummy-data";
 import "./ProfilePage.css";
 
-function PromoForm({ id, isOpen }) {
+function PromoForm({ 
+        id, 
+        isOpen, 
+        addPromoSuccess, 
+        formStatus, 
+        authedUser 
+    }) {
 
-    const [today, setToday] = React.useState(getToday());
-    const [title, setTitle] = useInput(""); 
-    const [from, setFrom] = useInput(""); 
-    const [to, setTo] = useInput(""); 
-    const [address, setAddress] = useInput(""); 
-    const [link, setLink] = useInput(""); 
-    const [phone, setPhone] = useInput(""); 
+    const [today, setToday]             = React.useState(getToday());
+    const [title, setTitle]             = useInput(""); 
+    const [from, setFrom]               = useInput(""); 
+    const [to, setTo]                   = useInput(""); 
+    const [address, setAddress]         = useInput(""); 
+    const [link, setLink]               = useInput(""); 
+    const [phone, setPhone]             = useInput(""); 
     const [description, setDescription] = useInput("");  
-    const [city, setCity] = useInput("0"); 
-    const [photo, setPhoto] = useInput("");
+    const [city, setCity]               = useInput("0"); 
+    const [photo, setPhoto]             = useInput("");
+    const [error, setError]             = React.useState({});
 
     // city options
     let cities = getCities().map(city => ({ key: city.id, value: city.name }));
@@ -35,9 +42,40 @@ function PromoForm({ id, isOpen }) {
         setDescription("");
         setCity("0");
         setPhoto("");
+        setError({});
+    }
+
+    const submitHandler = () => {
+        if (formStatus === "add") {
+            const { error,  message, data } = insertPromo({
+                umkm: authedUser.id,
+                title,
+                from,
+                to,
+                address,
+                link,
+                phone,
+                description,
+                city,
+                photo
+            });
+
+            if (!error) {
+                setError({noError: true});
+                addPromoSuccess();
+            }else {
+                setError({[data.type]: data.message});
+            }
+        }else {
+
+        }
+
+        // scroll to top
+        window.scrollTo(0, 0);
     }
     
     React.useEffect(() => {
+        // for edit form
         if (id != null) {
             const { error, data } = getPromo(id);
             if(!error) {
@@ -51,15 +89,21 @@ function PromoForm({ id, isOpen }) {
                 setCity(data.city);
                 setPhoto(data.image);
             }
-        }else {
+        }
+        // for add form
+        else {
             resetInput();
+            setAddress(authedUser.address);
+            setLink(authedUser.link);
+            setPhone(authedUser.phone);
+            setCity(authedUser.city);
         }
     }, [isOpen]);
 
     return (
         <PromoWrapper>
             <div className="promo-form-section">
-                <Form>
+                <Form onSubmitHandler={submitHandler}>
                     <Input
                         horizontal
                         onChangeHandler={setTitle}
@@ -67,13 +111,17 @@ function PromoForm({ id, isOpen }) {
                         type="text"
                         value={title}
                         placeholder="Judul Promo..."
+                        name="title"
+                        errorMessage={error.title}
                     />
                     <FileInput
                         horizontal
                         onChangeHandler={setPhoto}
                         value={photo}
-                        label="Foto Profile"
+                        label="Foto Promo"
                         id="foto"
+                        name="photo"
+                        errorMessage={error.photo}
                     />
                     <div className="promo-form-date">
                         <div>
@@ -84,6 +132,8 @@ function PromoForm({ id, isOpen }) {
                                 type="date"
                                 min={from || today}
                                 value={from}
+                                name="from"
+                                errorMessage={error.from}
                             />
                         </div>
                         <div>
@@ -95,15 +145,29 @@ function PromoForm({ id, isOpen }) {
                                 min={from || today}
                                 disabled={from ? false : true}
                                 value={to}
+                                name="to"
+                                errorMessage={error.to}
                             />
                         </div>
                     </div>
+                    <TextArea
+                        horizontal
+                        label="Deskripsi Promo"
+                        placeholder="Deskripsi..."
+                        isReset={!isOpen}
+                        value={description}
+                        onInputHandler={setDescription}
+                        name="description"
+                        errorMessage={error.description}
+                    />
                     <Select
                         horizontal
                         defaultKeyValue={city} 
                         values={cities}
                         label="Kota UMKM"
                         onChangeHandler={setCity}
+                        name="city"
+                        errorMessage={error.city}
                     />
                     <Input
                         horizontal
@@ -112,6 +176,8 @@ function PromoForm({ id, isOpen }) {
                         type="text"
                         value={address}
                         placeholder="Alamat UMKM..."
+                        name="address"
+                        errorMessage={error.address}
                     />
                     <Input
                         horizontal
@@ -120,6 +186,8 @@ function PromoForm({ id, isOpen }) {
                         type="text"
                         value={link}
                         placeholder="Alamat Webiste atau Sosial Media..."
+                        name="link"
+                        errorMessage={error.link}
                     />
                     <Input
                         horizontal
@@ -128,14 +196,8 @@ function PromoForm({ id, isOpen }) {
                         type="text"
                         value={phone}
                         placeholder="Nomor Telpon..."
-                    />
-                    <TextArea
-                        horizontal
-                        label="Description"
-                        placeholder="Deskripsi..."
-                        isReset={!isOpen}
-                        value={description}
-                        onInputHandler={setDescription}
+                        name="phone"
+                        errorMessage={error.phone}
                     />
                     <SubmitButton label="Simpan" />
                 </Form>

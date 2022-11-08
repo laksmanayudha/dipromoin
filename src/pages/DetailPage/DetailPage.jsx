@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { getPromo } from "../../utils/dummy-data";
-import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import { PromoDetail } from "../../components/PromoDetail";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import "./DetailPage.css";
 
 function DetailPage() {

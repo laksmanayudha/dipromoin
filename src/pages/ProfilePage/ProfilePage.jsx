@@ -11,11 +11,17 @@ import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import parser from "html-react-parser";
 import "./ProfilePage.css";
 
-function ProfilePage({ authedUser, PopUp, openPopUp, isOpen }){
+function ProfilePage({ authedUser, PopUp, openPopUp, closePopUp, isOpen }){
 
     const { param } = useParams();
     const [profile, setProfile] = React.useState(null);
     const [promos, setPromos] = React.useState([]);
+    const [fetchPromo, setFetchPromo] = React.useState(true);
+
+    const addPromoSuccess = () => {
+        closePopUp();
+        setFetchPromo(true);
+    }
 
     React.useEffect(() => {
         // get UMKM Profile
@@ -30,6 +36,17 @@ function ProfilePage({ authedUser, PopUp, openPopUp, isOpen }){
             setPromos(dataPromos.data);
         }
     }, [param, authedUser]);
+
+    React.useEffect(() => {
+        if (fetchPromo) {
+            // get updated UMKM Promos
+            const dataPromos = getUMKMPromos(param);
+            if (!dataPromos.error) {
+                setPromos(dataPromos.data);
+            }
+            setFetchPromo(false);
+        }
+    }, [fetchPromo])
 
     if (!profile) {
         return <NotFoundPage />
@@ -68,6 +85,7 @@ function ProfilePage({ authedUser, PopUp, openPopUp, isOpen }){
                             <PromoListsSection 
                                 promos={promos} 
                                 openPopUp={openPopUp} 
+                                addPromoSuccess={addPromoSuccess}
                                 PopUp={PopUp} 
                                 isOpen={isOpen}
                                 authedUser={authedUser}

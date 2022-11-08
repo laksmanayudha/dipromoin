@@ -21,7 +21,7 @@ function Input({
             {label && <label className="form-input__label" htmlFor={id}>{label}</label>}
             <div className="form-input__container">
                 <input 
-                    className="form-input__input" 
+                    className={"form-input__input " + (disabled ? "form-input--disabled" : "")}
                     type={type} id={id} name={name}
                     onChange={(event) => { onChangeHandler(event.target.value) }} 
                     value={value} 

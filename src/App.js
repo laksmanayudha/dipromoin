@@ -3,7 +3,7 @@ import { Navbar, NavbarLink } from "./components/Navbar";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { Footer } from "./components/Footer";
 import { getAuthPages, getGuestPages, routes } from "./pages";
-import { getAuthUMKM } from "./utils/dummy-data";
+import { getAuthUMKM, updateDataFromLocalStorage } from "./utils/dummy-data";
 import { putAccessToken } from "./utils/dummy-data";
 import { UpdateProfileContext } from "./contexts/updateProfileContext";
 import onWindowScroll from "./utils/onWindowScroll";
@@ -39,6 +39,7 @@ function App() {
     onWindowScroll();
     onWindowResize();
     onDocumentClick();
+    updateDataFromLocalStorage();
   }, []);
 
   React.useEffect(() => {

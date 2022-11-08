@@ -35,7 +35,7 @@ function FileInput({
             });
             reader.readAsDataURL(event.target.files[0]);
         }else {
-            setError("File size exceed the allowed maximum size.");
+            setError("File size exceed the allowed maximum size. (" + (maxSize/1024) + "Kb)");
         }
     }
 

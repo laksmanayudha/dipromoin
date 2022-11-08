@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
+import parser from "html-react-parser";
 import { Image } from "../Image";
 import { Link } from "react-router-dom";
 import { GoToButton } from "../Button";
-import PropTypes from "prop-types";
 import { getTime, getCity, getUMKM } from "../../utils/dummy-data";
 import { routes } from "../../pages";
 import "./PromoDetail.css"
@@ -38,7 +39,7 @@ function PromoDetail({
                 <small className="promo-detail-body__address">{getCity(city)} - {address}</small> <br />
                 <small className="promo-detail-body__time">{getTime(from)} - {getTime(to)}</small> <br />
                 <div className="promo-detail-body__description">
-                {description}
+                    {parser(description)}
                 </div>
             </div>
         </div>

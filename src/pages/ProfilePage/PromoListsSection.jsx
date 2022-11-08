@@ -9,26 +9,34 @@ import { getPromo } from "../../utils/dummy-data";
 import { PromoDetail, PromoWrapper } from "../../components/PromoDetail";
 import "./ProfilePage.css";
 
-function PromoListsSection({ authedUser, promos, openPopUp, PopUp, isOpen, currentProfile }) {
+function PromoListsSection({ 
+        authedUser, 
+        promos, 
+        openPopUp, 
+        PopUp, 
+        isOpen, 
+        currentProfile,
+        addPromoSuccess 
+    }) {
 
     const [currentPromoId, setCurrentPromoId] = React.useState(null);
     const [currentPromo, setCurrentPromo] = React.useState(null);
-    const [popUpStatus, setPopUpStatus] = React.useState("add"); // add, edit, detail
+    const [formStatus, setFormStatus] = React.useState("add"); // add, edit, detail
 
     const onAddClick = () => {
-        setPopUpStatus("add");
+        setFormStatus("add");
         setCurrentPromoId(null);
         openPopUp();
     }
 
     const onEditClick = (id) => {
-        setPopUpStatus("edit");
+        setFormStatus("edit");
         setCurrentPromoId(id);
         openPopUp();
     }
 
     const onDetailClick = (id) => {
-        setPopUpStatus("detail");
+        setFormStatus("detail");
         setCurrentPromoId(id);
         openPopUp();
     }
@@ -95,21 +103,26 @@ function PromoListsSection({ authedUser, promos, openPopUp, PopUp, isOpen, curre
                     ))}
                 </CardLists>
             </div>
-            {popUpStatus === "add" && PopUp(
+            {formStatus === "add" && PopUp(
                 <PromoFormSection 
                     id={null}
-                    isOpen={isOpen}  
+                    isOpen={isOpen}
+                    addPromoSuccess={addPromoSuccess}
+                    formStatus="add"
+                    authedUser={authedUser}  
                 />
             )}
 
-            {popUpStatus === "edit" && PopUp(
+            {formStatus === "edit" && PopUp(
                 <PromoFormSection 
                     id={currentPromoId}
-                    isOpen={isOpen}  
+                    isOpen={isOpen}
+                    formStatus="edit"  
+                    authedUser={authedUser}  
                 />
             )}
 
-            {(popUpStatus === "detail" && currentPromo) && PopUp(
+            {(formStatus === "detail" && currentPromo) && PopUp(
                 <PromoWrapper>
                     <PromoDetail {...currentPromo} />
                 </PromoWrapper>

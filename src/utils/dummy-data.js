@@ -344,8 +344,8 @@ const login = ({email, password}) => {
     return { error: false, message: "Login Success", data: { token: umkm.id } }
 }
 
-const validateIsEmpty = (value, field, customMessage) => {
-    if (!value) {
+const validateIsRequired = (value, field, customMessage) => {
+    if (!value || value === "0") {
         throw { type: field, message: customMessage }
     }
     return;
@@ -371,11 +371,11 @@ const generateId = () => +new Date() + "";
 const register = ({name, email, password, passwordConfirmation}) => {
 
     try{
-        validateIsEmpty(name, "name", "Name is Required");
-        validateIsEmpty(email, "email", "Email is Requierd");
+        validateIsRequired(name, "name", "Name is Required");
+        validateIsRequired(email, "email", "Email is Requierd");
         validateIsEmailAvailable(email);
-        validateIsEmpty(password, "password", "Password is Required");
-        validateIsEmpty(passwordConfirmation, "passwordConfirmation", "Confirm Your Password");
+        validateIsRequired(password, "password", "Password is Required");
+        validateIsRequired(passwordConfirmation, "passwordConfirmation", "Confirm Your Password");
         validateIsSame(password, passwordConfirmation, "passwordConfirmation", "Mismatch Password and Password Confirmation");
     }catch(e) {
         return { error: true, message: "Invalid Input", data: e }
@@ -411,7 +411,6 @@ const insertUMKM = ({
     }) => {
 
     dummyUMKMProfile = [
-        ...dummyUMKMProfile,
         {
             id,
             name,
@@ -423,7 +422,8 @@ const insertUMKM = ({
             link,
             city,
             address
-        } 
+        },
+        ...dummyUMKMProfile, 
     ];
 
     saveData();
@@ -441,7 +441,7 @@ const updateUMKM = ({
     }) => {
 
     try{
-        validateIsEmpty(name, "name", "Name is Required");
+        validateIsRequired(name, "name", "Name is Required");
     }catch(e) {
         return { error: true, message: "Invalid Input", data: e }
     }
@@ -460,6 +460,55 @@ const updateUMKM = ({
     
     saveData();
     return { error: false, message: "Success update profile", data: null };
+
+}
+
+const insertPromo = ({
+    umkm,
+    title,
+    from,
+    to,
+    address,
+    link,
+    phone,
+    description,
+    city,
+    photo
+}) => {
+
+    try{
+        validateIsRequired(title, "title", "Title is Required");
+        validateIsRequired(photo, "photo", "Promo image is Required");
+        validateIsRequired(from, "from", "Start date is Required");
+        validateIsRequired(to, "to", "End date is Required");
+        validateIsRequired(description, "description", "Description is Required");
+        validateIsRequired(city, "city", "City is Required");
+        validateIsRequired(address, "address", "Address is Required");
+        validateIsRequired(phone, "phone", "Phone is Required");
+    }catch(e) {
+        return {error: true, message: "Fail to insert promo", data: e }
+    }
+
+    dummyPromos = [
+        {
+            id: generateId(),
+            umkm,
+            title,
+            image: photo,
+            description,
+            from,
+            to,
+            city,
+            address,
+            phone,
+            link,
+        },
+        ...dummyPromos
+    ];
+
+    saveData();
+
+    return {error: false, message: "Success to insert promo", data: null};
 
 }
 
@@ -483,14 +532,18 @@ const updateDataFromLocalStorage = () => {
         dummyUMKMProfile = JSON.parse(umkms);
     }
 
+    const promos = getFromLocalStorage(PROMOS);
+    if (promos) {
+        dummyPromos = JSON.parse(promos);
+    }
+
     saveData();
 }
 
-// update initial data before all UI/document rendered
-updateDataFromLocalStorage();
+// // update initial data before all UI/document rendered
+// updateDataFromLocalStorage();
 
 export { 
-    dummyUMKMProfile,
     getUMKM,
     getPromo,
     getPromos,
@@ -505,5 +558,6 @@ export {
     putAccessToken,
     putToLocalStorage,
     updateDataFromLocalStorage,
-    updateUMKM
+    updateUMKM,
+    insertPromo
 };

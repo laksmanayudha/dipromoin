@@ -16,7 +16,7 @@ function Card({ image, title, subtitle, description, leftHeader, action, to }) {
             <div className="card-body">
                 <h4 className="card-body__title"><Link to={to}>{title}</Link></h4>
                 <small className="card-body__subtitle">{subtitle}</small>
-                <p className="card-body__description">{parser(description)}</p>
+                <div className="card-body__description">{parser(description)}</div>
             </div>
         </div>
     );

@@ -8,14 +8,15 @@ import "./ProfilePage.css";
 
 function EditProfileSection({ authedUser }) {
 
-    const [name, setName] = useInput(authedUser.name); 
-    const [address, setAddress] = useInput(authedUser.address); 
-    const [link, setLink] = useInput(authedUser.link); 
-    const [phone, setPhone] = useInput(authedUser.phone); 
-    const [description, setDescription] = useInput(authedUser.description); 
-    const [city, setCity] = useInput(authedUser.city); 
-    const [profileImage, setProfileImage] = useInput(authedUser.profileImage); 
-    const [errors, setErrors] = React.useState({});
+    const [name, setName]                   = useInput(authedUser.name); 
+    const [email]                           = useInput(authedUser.email); 
+    const [address, setAddress]             = useInput(authedUser.address); 
+    const [link, setLink]                   = useInput(authedUser.link); 
+    const [phone, setPhone]                 = useInput(authedUser.phone); 
+    const [description, setDescription]     = useInput(authedUser.description); 
+    const [city, setCity]                   = useInput(authedUser.city); 
+    const [profileImage, setProfileImage]   = useInput(authedUser.profileImage); 
+    const [errors, setErrors]               = React.useState({});
 
     // context 
     const {setIsProfileUpdate} = React.useContext(UpdateProfileContext);
@@ -39,10 +40,11 @@ function EditProfileSection({ authedUser }) {
         if (!error) {
             setErrors({noError: true});
             setIsProfileUpdate(true);
-            window.scrollTo(0, 0);
         }else {
             setErrors({[data.type]: data.message});
         }
+
+        window.scrollTo(0, 0);
     }
 
     return (
@@ -62,6 +64,16 @@ function EditProfileSection({ authedUser }) {
                     placeholder="Nama UMKM..."
                     name="name"
                     errorMessage={errors.name}
+                />
+                <Input
+                    horizontal
+                    label="Email"
+                    type="email"
+                    value={email}
+                    placeholder="Email..."
+                    name="email"
+                    disabled={true}
+                    onChangeHandler={() =>{}}
                 />
                 <FileInput
                     horizontal

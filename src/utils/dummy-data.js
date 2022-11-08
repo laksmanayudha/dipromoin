@@ -605,8 +605,8 @@ const updateDataFromLocalStorage = () => {
     saveData();
 }
 
-// // update initial data before all UI/document rendered
-// updateDataFromLocalStorage();
+// update initial data before all UI/document rendered
+updateDataFromLocalStorage();
 
 export { 
     getUMKM,

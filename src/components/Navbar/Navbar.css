@@ -1,7 +1,6 @@
 @import url("../../App.css");
 
-.navbar,
-.navbar-body__nav h4 a{
+.navbar-body__nav h4 a {
     color: var(--red);
 }
 
@@ -19,6 +18,7 @@
 
 .navbar-header__logo {
     font-weight: bold;
+    color: var(--red);
 }
 
 .navbar-header__toggle{

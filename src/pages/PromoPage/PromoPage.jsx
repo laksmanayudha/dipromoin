@@ -7,6 +7,7 @@ import { PromoDetail, PromoWrapper } from "../../components/PromoDetail";
 import { setActionOnWindowResize, getCurrenWindowSize } from "../../utils/onWindowResize";
 import { Form, Input, Select, SubmitButton } from "../../components/Form";
 import { useSearchParams } from "react-router-dom";
+import { routes } from "..";
 import withPopUp from "../../hocs/withPopUp";
 import createPages from "../../utils/createPages";
 import useInput from "../../hooks/useInput";
@@ -121,9 +122,13 @@ function PromoPage({ PopUp, openPopUp, closePopUp }) {
                         {promos.length === 0 && <h4 style={{ color: "var(--grey-1)" }}>Promo Tidak Ditemukan</h4>}
                         {promos && promos.map((item, index) => (
                             <Card 
-                                key={index} 
-                                {...{...item, subtitle: `${getCity(item.city)} | ${getTime(item.from)} - ${getTime(item.to)}`}} 
+                                key={index}
                                 leftHeader={true} 
+                                title={item.title}
+                                subtitle={`${getCity(item.city)} | ${getTime(item.from)} - ${getTime(item.to)}`}
+                                image={item.image}
+                                description={item.description}
+                                to={routes("promoDetail", item.id)}
                                 action={ () => { onCardClickHandler(index) } } 
                             />
                         ))}

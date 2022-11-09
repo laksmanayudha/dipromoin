@@ -6,7 +6,7 @@ import { PageNav, Pagination } from "../../components/Pagination";
 import { PromoDetail, PromoWrapper } from "../../components/PromoDetail";
 import { setActionOnWindowResize, getCurrenWindowSize } from "../../utils/onWindowResize";
 import { Form, Input, Select, SubmitButton } from "../../components/Form";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { routes } from "..";
 import withPopUp from "../../hocs/withPopUp";
 import createPages from "../../utils/createPages";
@@ -23,6 +23,7 @@ function PromoPage({ PopUp, openPopUp, closePopUp }) {
     const [nextPage, setNextPage] = React.useState(1);
     const [prevPage, setPrevPage] = React.useState(1);
     const [currentPage, setCurrentPage] = React.useState(1);
+    const { search } = useLocation();
 
     // filter input
     const [keyword, setKeyword] = useInput("");
@@ -84,7 +85,7 @@ function PromoPage({ PopUp, openPopUp, closePopUp }) {
             setPageParam({ page: 1 });
             setFiltering(false);
         }
-    }, [currentPage, filtering]);
+    }, [currentPage, filtering, search]);
 
     // create list of page
     const pages = createPages(maxPage);

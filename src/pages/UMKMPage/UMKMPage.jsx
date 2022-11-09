@@ -4,7 +4,7 @@ import { Card, CardLists } from "../../components/CardLists";
 import { FilterContainer } from "../../components/Filter";
 import { PageNav, Pagination } from "../../components/Pagination";
 import { Form, Input, SubmitButton } from "../../components/Form";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import createPages from "../../utils/createPages";
 import useInput from "../../hooks/useInput";
 import "./UMKMPage.css";
@@ -20,6 +20,7 @@ function UMKMPage() {
     const [prevPage, setPrevPage] = React.useState(1);
     const [currentPage, setCurrentPage] = React.useState(1);
     const [umkms, setUMKMs] = React.useState([]);
+    const { search } = useLocation();
 
     // filter input
     const [keyword, setKeyword] = useInput("");
@@ -52,7 +53,7 @@ function UMKMPage() {
             setPageParam({ page: 1 });
             setFiltering(false);
         }
-    }, [currentPage, filtering]);
+    }, [currentPage, filtering, search]);
 
     // create list of page
     const pages = createPages(maxPage);

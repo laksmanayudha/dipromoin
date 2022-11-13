@@ -1,7 +1,7 @@
 @import url("../../App.css");
 
-.navbar-body__nav h4 a {
-    color: var(--red);
+.dummy {
+    
 }
 
 .navbar {
@@ -40,6 +40,12 @@
 
 .navbar-body__nav:hover {
     border: 1px solid var(--red);
+}
+
+.navbar-body__nav h4 a {
+    color: var(--red);
+    width: 100%;
+    display: inline-block;
 }
 
 .navbar-body--active {

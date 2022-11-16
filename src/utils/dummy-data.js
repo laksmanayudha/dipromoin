@@ -21,7 +21,7 @@ let dummyCities = [
     },
     {
         id: "5",
-        name: "Yogayakarta"
+        name: "Yogyakarta"
     },
     {
         id: "6",
@@ -30,6 +30,26 @@ let dummyCities = [
     {
         id: "7",
         name: "Bandung"
+    },
+    {
+        id: "8",
+        name: "Medan"
+    },
+    {
+        id: "9",
+        name: "Solo"
+    },
+    {
+        id: "10",
+        name: "Makasar"
+    },
+    {
+        id: "11",
+        name: "Kupang"
+    },
+    {
+        id: "12",
+        name: "Palembang"
     },
 ];
 
@@ -64,7 +84,7 @@ let dummyPromos = [
     },
     {
         id: "2",
-        from: "2022-08-20",
+        from: "2022-8-20",
         to: "2022-10-26",
         image: "/images/opening-2.jpg", 
         title: "Soft Diskon 20% off", 
@@ -182,6 +202,57 @@ let dummyPromos = [
         link: "https://www.instagram.com/laksmanayudha_/?hl=en", 
         phone: "6282235537167",
     },
+    {
+        id: "8",
+        from: "2022-10-14",
+        to: "2022-10-20",
+        image: "/images/locknlock_toserba_yogya.jpg", 
+        title: "Toserba Yogya Special Promo Lock & Lock ", 
+        umkm: "8", 
+        city: "6",
+        address: "Jl. Pergudangan Margomulyo Permai No.7", 
+        description: `
+            Special Discount di Toserba Yogya, Nikmati promo Up To 30% Selected Item LocknLock mulai 14 - 20 Oktober 2022.
+            Yuk segera datang jangan sampai ketinggalan!!
+            
+            *Selama persediaan masih ada 
+        `, 
+        link: "https://www.instagram.com/laksmanayudha_/?hl=en", 
+        phone: "08222778765",
+    },
+    {
+        id: "9",
+        from: "2022-10-1",
+        to: "2022-10-31",
+        image: "/images/zen-tableware-disc.jpg", 
+        title: "ZEN Oktober Fest Disc. 10% ", 
+        umkm: "7", 
+        city: "8",
+        address: "Jl. Pattimura No. 16, Sudirman Barat", 
+        description: `
+            Jangan sampai kehabisan special Discount 10%  Sanrio Coellection hanya di ZEN fine porcelaim tableware kesayangan anda.
+            
+            *Selama persediaan masih ada 
+        `, 
+        link: "https://www.instagram.com/laksmanayudha_/?hl=en", 
+        phone: "08126548765",
+    },
+    {
+        id: "10",
+        from: "2022-10-26",
+        to: "2022-11-14",
+        image: "/images/nyemil-store-disc.jpg", 
+        title: "Special Midnight Halloween Discount 50% ", 
+        umkm: "5", 
+        city: "1",
+        address: "Jalan Sudirman Barat No. 76, Pasar Baru", 
+        description: `
+            Special Midnight Halloween Discount 50% untuk Halloween Cupcakes.
+            Diskon khusus 31 Oktober 2022 start from 10.00 PM. 
+        `, 
+        link: "https://www.instagram.com/laksmanayudha_/?hl=en", 
+        phone: "081534438765",
+    },
 ]
 
 let dummyUMKMProfile = [
@@ -232,6 +303,54 @@ let dummyUMKMProfile = [
         link: "https://www.instagram.com/laksmanayudha_/?hl=en",
         city: "5",
         address: "Jalan Angelir No. 236",
+    },
+    {
+        id: "5",
+        name: "Nyemil Store",
+        email: "nyemil.store@email.com",
+        password: "102938476",
+        profileImage: "/images/nyemil-store.jpg",
+        description: "Nyemil Store menjual aneka cemilan hingga cupcake kekinian yang dapat juga dipesan sesuai request.",
+        phone: "081534438765",
+        link: "https://www.instagram.com/laksmanayudha_/?hl=en",
+        city: "1",
+        address: "Jalan Sudirman Barat No. 76, Pasar Baru",
+    },
+    {
+        id: "6",
+        name: "Nature Soap",
+        email: "thenaturesoap@email.com",
+        password: "qqqwweerrttyy12",
+        profileImage: "/images/nature-soap.jpg",
+        description: "Nature Soap memberikan dedikasi bahan terbaik dari alam untuk menjaga kesehatan kulit anda.",
+        phone: "081265438765",
+        link: "https://www.instagram.com/laksmanayudha_/?hl=en",
+        city: "12",
+        address: "Jl. Merdeka Barat No. 176",
+    },
+    {
+        id: "7",
+        name: "ZEN Tableware Store",
+        email: "zenofficial@email.com",
+        password: "qqiqefyy12",
+        profileImage: "/images/zen-tableware.jpg",
+        description: "Zen memberikan kualitas pada setiap tableware kesayang anda.",
+        phone: "08126548765",
+        link: "https://www.instagram.com/laksmanayudha_/?hl=en",
+        city: "8",
+        address: "Jl. Pattimura No. 16, Sudirman Barat",
+    },
+    {
+        id: "8",
+        name: "Toserba Yogya",
+        email: "yogyagroup@email.com",
+        password: "qqoapsoajb2",
+        profileImage: "/images/toserba-yogya.jpeg",
+        description: "Toserba Yogya merupakan toko serba ada yang menyediakan kebutuhan sehari-hari anda.",
+        phone: "0802778765",
+        link: "https://www.instagram.com/laksmanayudha_/?hl=en",
+        city: "10",
+        address: "Jl. Pergudangan Margomulyo Permai No.7",
     },
 ]
 
